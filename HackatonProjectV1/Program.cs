@@ -1,5 +1,6 @@
 using HackatonProjectV1.Context;
 using HackatonProjectV1.Entities;
+using HackatonProjectV1.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -20,6 +21,9 @@ builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
 })
 .AddEntityFrameworkStores<HtContext>()
 .AddDefaultTokenProviders();
+
+builder.Services.AddHttpClient();
+builder.Services.AddHttpClient<EDevletService>();
 
 
 

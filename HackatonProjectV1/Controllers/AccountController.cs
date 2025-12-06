@@ -1,4 +1,5 @@
 ﻿using HackatonProjectV1.Entities;
+using HackatonProjectV1.Services;
 using HackatonProjectV1.ViewModel;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -9,11 +10,13 @@ namespace HackatonProjectV1.Controllers
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
+        private readonly EDevletService _eDevletService;
 
-        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> singInManager)
+        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> singInManager, EDevletService eDevletService)
         {
             _userManager = userManager;
             _signInManager = singInManager;
+            _eDevletService = eDevletService;
         }
 
 
@@ -105,6 +108,13 @@ namespace HackatonProjectV1.Controllers
 
             return View(model);
             
+        }
+
+        public async Task<IActionResult> Dogrula(string barcode)
+        {
+            var sonuc = await _eDevletService.DogrulaAsyn("BARKOD_NUMARASI_HERE");
+
+            return Content(sonuc, "application/json");
         }
 
     }
