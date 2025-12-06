@@ -45,17 +45,10 @@
                     <div asp-validation-summary="All" class="text-danger"></div>
                     <div class="form-row">
                         <div class="input-group">
-                            <label for="fullname">İsim </label>
+                            <label for="fullname">İsim Soyisim </label>
                             <div class="input-field">
                                 <i class="fa-regular fa-id-card input-icon"></i>
-                                <input asp-for="FirstName" type="text" id="fullname" placeholder="Ad Soyad" >
-                            </div>
-                        </div>
-                        <div class="input-group">
-                            <label for="fullname"> Soyisim</label>
-                            <div class="input-field">
-                                <i class="fa-regular fa-id-card input-icon"></i>
-                                <input asp-for="LastName" type="text" id="fullname" placeholder="Ad Soyad" >
+                                <input asp-for="NameAndLastname" type="text" id="fullname" placeholder="İsim Soyisim" >
                             </div>
                         </div>
                         <div class="input-group">

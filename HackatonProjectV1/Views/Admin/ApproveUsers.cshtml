@@ -1,0 +1,291 @@
+﻿@model HackatonProjectV1.ViewModel.UserUpdateViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Paneli</title>
+    <link rel="stylesheet" href="~/css/AdminPage/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <h2>Panel v1.0</h2>
+        </div>
+
+        <div class="admin-profile">
+            <div class="admin-avatar">
+                <i class="fa-solid fa-user-tie"></i>
+            </div>
+            <div class="admin-info">
+                <h3>Admin İsmi</h3>
+                <span>Süper Yönetici</span>
+            </div>
+        </div>
+
+        <nav class="menu">
+            <ul>
+                <li><a href="#" class="active"><i class="fa-solid fa-list-check"></i> Başvurular</a></li>
+                <li><a href="#"><i class="fa-solid fa-users"></i> Öğrenciler</a></li>
+                <li><a href="#"><i class="fa-solid fa-gear"></i> Ayarlar</a></li>
+                <li><a href="#" class="logout"><i class="fa-solid fa-right-from-bracket"></i> Çıkış</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <header>
+            <h1>Öğrenci Kayıt Onay Ekranı</h1>
+        </header>
+
+
+        <div class="content-wrapper">
+            @foreach(var item in Model.UnaprrovedUsers)
+            {
+                <div class="entry-box">
+                    <div class="info-header">
+                        <div class="info-group">
+                            <span class="badge id-badge">ID: #@item.Id</span>
+
+                            <div class="info-item">
+                                <i class="fa-solid fa-id-card info-icon"></i>
+                                <span class="info-label">TC:</span>
+                                <span class="info-value" id="tc-1042">@item.TcNo</span>
+                                <button type="button" class="btn-copy" onclick="copyText('@item.TcNo')" title="Kopyala">
+                                    <i class="fa-regular fa-copy"></i>
+                                </button>
+                            </div>
+
+                            <div class="info-item">
+                                <i class="fa-solid fa-barcode info-icon"></i>
+                                <span class="info-label">Barkod:</span>
+                                <span class="info-value" id="@item.StudentBarcode">@item.StudentBarcode</span>
+                                <button type="button" class="btn-copy" onclick="copyText('barcode-1042')" title="Kopyala">
+                                    <i class="fa-regular fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <a href="https://www.turkiye.gov.tr/" target="_blank" class="btn-edevlet">
+                            <i class="fa-solid fa-building-columns"></i> e-Devlet
+                        </a>
+                    </div>
+
+                    <form id="form-1042" asp-action="/Admin/ApproveStudent" class="education-form" method="post">
+                        <input type="hidden" asp-for="Id" />
+                        <div class="form-row">
+                            <div class="input-group">
+                                <label>Üniversite</label>
+                                <input asp-for="University" type="text" name="universite" value="İstanbul Teknik Üniversitesi">
+                            </div>
+                            <div class="input-group">
+                                <label>Fakülte</label>
+                                <input asp-for="Faculty" type="text" name="fakulte" value="Bilgisayar ve Bilişim Fak.">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="input-group">
+                                <label>Bölüm</label>
+                                <input asp-for="Department" type="text" name="bolum" value="Bilgisayar Mühendisliği">
+                            </div>
+                            <div class="input-group">
+                                <label>Sınıf</label>
+                                <input asp-for="Class" type="text" name="sinif" value="4. Sınıf">
+                            </div>
+                        </div>
+                        <button type="submit" form="form-1042" class="btn btn-approve">
+                            <i class="fa-solid fa-check"></i> Onayla
+                        </button>
+                    </form>
+                    <div class="action-buttons">
+
+                        
+
+                        <a href="/reddet/1042" class="btn btn-reject">
+                            <i class="fa-solid fa-xmark"></i> Onaylama
+                        </a>
+
+                    </div>
+                </div>
+            }
+
+            <div class="entry-box">
+                <div class="info-header">
+                    <div class="info-group">
+                        <span class="badge id-badge">ID: #1042</span>
+
+                        <div class="info-item">
+                            <i class="fa-solid fa-id-card info-icon"></i>
+                            <span class="info-label">TC:</span>
+                            <span class="info-value" id="tc-1042">12345678901</span>
+                            <button type="button" class="btn-copy" onclick="copyText('tc-1042')" title="Kopyala">
+                                <i class="fa-regular fa-copy"></i>
+                            </button>
+                        </div>
+
+                        <div class="info-item">
+                            <i class="fa-solid fa-barcode info-icon"></i>
+                            <span class="info-label">Barkod:</span>
+                            <span class="info-value" id="barcode-1042">BR-885412</span>
+                            <button type="button" class="btn-copy" onclick="copyText('barcode-1042')" title="Kopyala">
+                                <i class="fa-regular fa-copy"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <a href="https://www.turkiye.gov.tr/" target="_blank" class="btn-edevlet">
+                        <i class="fa-solid fa-building-columns"></i> e-Devlet
+                    </a>
+                </div>
+
+                <form id="form-1042" class="education-form" action="/basvuru-onayla" method="POST">
+                    <div class="form-row">
+                        <div class="input-group">
+                            <label>Üniversite</label>
+                            <input type="text" name="universite" value="İstanbul Teknik Üniversitesi">
+                        </div>
+                        <div class="input-group">
+                            <label>Fakülte</label>
+                            <input type="text" name="fakulte" value="Bilgisayar ve Bilişim Fak.">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="input-group">
+                            <label>Bölüm</label>
+                            <input type="text" name="bolum" value="Bilgisayar Mühendisliği">
+                        </div>
+                        <div class="input-group">
+                            <label>Sınıf</label>
+                            <input type="text" name="sinif" value="4. Sınıf">
+                        </div>
+                    </div>
+                </form>
+                <div class="action-buttons">
+
+                    <button type="submit" form="form-1042" class="btn btn-approve">
+                        <i class="fa-solid fa-check"></i> Onayla
+                    </button>
+
+                    <a href="/reddet/1042" class="btn btn-reject">
+                        <i class="fa-solid fa-xmark"></i> Onaylama
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="entry-box">
+                <div class="info-header">
+                    <div class="info-group">
+                        <span class="badge id-badge">ID: #1043</span>
+                        <div class="info-item">
+                            <i class="fa-solid fa-id-card info-icon"></i>
+                            <span class="info-label">TC:</span>
+                            <span class="info-value" id="tc-1043">55667788990</span>
+                            <button type="button" class="btn-copy" onclick="copyText('tc-1043')"><i class="fa-regular fa-copy"></i></button>
+                        </div>
+                        <div class="info-item">
+                            <i class="fa-solid fa-barcode info-icon"></i>
+                            <span class="info-label">Barkod:</span>
+                            <span class="info-value" id="barcode-1043">BR-112233</span>
+                            <button type="button" class="btn-copy" onclick="copyText('barcode-1043')"><i class="fa-regular fa-copy"></i></button>
+                        </div>
+                    </div>
+                    <a href="https://www.turkiye.gov.tr/" target="_blank" class="btn-edevlet">
+                        <i class="fa-solid fa-building-columns"></i> e-Devlet
+                    </a>
+                </div>
+
+                <form id="form-1043" class="education-form" action="/basvuru-onayla" method="POST">
+                    <div class="form-row">
+                        <div class="input-group"><label>Üniversite</label><input type="text" name="universite" value="Ankara Üniversitesi"></div>
+                        <div class="input-group"><label>Fakülte</label><input type="text" name="fakulte" value="Hukuk Fakültesi"></div>
+                    </div>
+                    <div class="form-row">
+                        <div class="input-group"><label>Bölüm</label><input type="text" name="bolum" value="Hukuk"></div>
+                        <div class="input-group"><label>Sınıf</label><input type="text" name="sinif" value="2. Sınıf"></div>
+                    </div>
+                </form>
+
+                <div class="action-buttons">
+                    <button type="submit" form="form-1043" class="btn btn-approve">
+                        <i class="fa-solid fa-check"></i> Onayla
+                    </button>
+                    <a href="/reddet/1043" class="btn btn-reject">
+                        <i class="fa-solid fa-xmark"></i> Onaylama
+                    </a>
+                </div>
+            </div>
+
+            <div class="entry-box">
+                <div class="info-header">
+                    <div class="info-group">
+                        <span class="badge id-badge">ID: #1044</span>
+                        <div class="info-item">
+                            <i class="fa-solid fa-id-card info-icon"></i>
+                            <span class="info-label">TC:</span>
+                            <span class="info-value" id="tc-1044">99887766554</span>
+                            <button type="button" class="btn-copy" onclick="copyText('tc-1044')"><i class="fa-regular fa-copy"></i></button>
+                        </div>
+                        <div class="info-item">
+                            <i class="fa-solid fa-barcode info-icon"></i>
+                            <span class="info-label">Barkod:</span>
+                            <span class="info-value" id="barcode-1044">BR-998877</span>
+                            <button type="button" class="btn-copy" onclick="copyText('barcode-1044')"><i class="fa-regular fa-copy"></i></button>
+                        </div>
+                    </div>
+                    <a href="https://www.turkiye.gov.tr/" target="_blank" class="btn-edevlet">
+                        <i class="fa-solid fa-building-columns"></i> e-Devlet
+                    </a>
+                </div>
+
+                <form id="form-1044" class="education-form" action="/basvuru-onayla" method="POST">
+                    <div class="form-row">
+                        <div class="input-group"><label>Üniversite</label><input type="text" name="universite" value="Boğaziçi Üniversitesi"></div>
+                        <div class="input-group"><label>Fakülte</label><input type="text" name="fakulte" value="Fen Edebiyat Fakültesi"></div>
+                    </div>
+                    <div class="form-row">
+                        <div class="input-group"><label>Bölüm</label><input type="text" name="bolum" value="Psikoloji"></div>
+                        <div class="input-group"><label>Sınıf</label><input type="text" name="sinif" value="Hazırlık"></div>
+                    </div>
+                    <button type="submit" form="form-1044" class="btn btn-approve">
+                        <i class="fa-solid fa-check"></i> Onayla
+                    </button>
+                </form>
+
+                <div class="action-buttons">
+
+                    <a href="/reddet/1044" class="btn btn-reject">
+                        <i class="fa-solid fa-xmark"></i> Onaylama
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+        function copyText(elementId) {
+            var textToCopy = document.getElementById(elementId).innerText;
+            var tempInput = document.createElement("input");
+            tempInput.value = textToCopy;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand("copy");
+            document.body.removeChild(tempInput);
+
+            const button = document.querySelector(`button[onclick="copyText('${elementId}')"] i`);
+            const originalClass = button.className;
+            button.className = "fa-solid fa-check";
+            setTimeout(() => {
+                button.className = originalClass;
+            }, 1000);
+        }
+    </script>
+</body>
+</html>

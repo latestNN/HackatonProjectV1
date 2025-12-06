@@ -4,13 +4,10 @@ namespace HackatonProjectV1.ViewModel
 {
     public class RegisterViewModel
     {
-        [Required(ErrorMessage = "Ad alanı zorunludur.")]
-        [Display(Name = "Ad")]
-        public string FirstName { get; set; }
+        [Required(ErrorMessage = "Ad-Soyad alanı zorunludur.")]
+        [Display(Name = "Ad - Soyad")]
+        public string NameAndLastname { get; set; }
 
-        [Required(ErrorMessage = "Soyad alanı zorunludur.")]
-        [Display(Name = "Soyad")]
-        public string LastName { get; set; }
 
         [Required(ErrorMessage = "TC Kimlik No zorunludur.")]
         [StringLength(11, MinimumLength = 11, ErrorMessage = "TC No 11 haneli olmalıdır.")]

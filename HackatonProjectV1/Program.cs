@@ -13,7 +13,7 @@ builder.Services.AddDbContext<HtContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 
-builder.Services.AddIdentity<AppUser, IdentityRole<int>>(options =>
+builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
 {
     options.Password.RequireDigit = false; // Rakam zorunluluðu kalksýn
     options.Password.RequiredLength = 6;   // En az 6 karakter
@@ -49,6 +49,14 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();
+
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    // Yazdýðýmýz metodu çaðýrýyoruz. await olduðu için Wait() ekliyoruz veya metodu async yapýyoruz.
+    // En kolayý Wait() ile beklemektir.
+    DbSeeder.SeedRolesAndAdminAsync(services).Wait();
+}
 
 
 app.Run();

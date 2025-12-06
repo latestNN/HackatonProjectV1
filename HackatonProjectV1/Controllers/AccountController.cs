@@ -44,8 +44,7 @@ namespace HackatonProjectV1.Controllers
                     Email = model.Email,
 
                     // Yeni alanları buraya ekliyoruz:
-                    FirstName = model.FirstName,
-                    LastName = model.LastName,
+                    NameAndLastname = model.NameAndLastname,
                     TcNo = model.TcNo,
                     StudentBarcode = model.StudentBarcode,
                     IsApproved = false // Yeni kullanıcılar başlangıçta onaylı değil

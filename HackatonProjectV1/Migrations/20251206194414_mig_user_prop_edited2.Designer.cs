@@ -4,6 +4,7 @@ using HackatonProjectV1.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HackatonProjectV1.Migrations
 {
     [DbContext(typeof(HtContext))]
-    partial class HtContextModelSnapshot : ModelSnapshot
+    [Migration("20251206194414_mig_user_prop_edited2")]
+    partial class mig_user_prop_edited2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
