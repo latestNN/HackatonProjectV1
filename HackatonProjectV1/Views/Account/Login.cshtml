@@ -1,0 +1,88 @@
+﻿@model HackatonProjectV1.ViewModel.LoginViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniForum - Giriş Yap</title>
+    <link rel="stylesheet" href="~/css/LoginPage/sign-up.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <div class="main-container">
+        <div class="left-section">
+            <div class="logo">
+                <i class="fa-solid fa-graduation-cap logo-icon"></i>
+                <span>UniForum</span>
+            </div>
+
+            <div class="text-slider">
+                <div class="text-slide active">
+                    <h1>Üniversite Dünyanı<br>Keşfet</h1>
+                    <p class="description">Kampüs hayatı, ders notları ve daha fazlası için Türkiye'nin dört bir yanından öğrencilerle buluş.</p>
+                </div>
+
+                <div class="text-slide">
+                    <h1>Ders Notlarına<br>Kolayca Eriş</h1>
+                    <p class="description">Vize ve final haftalarında ihtiyacın olan tüm notlara, çıkmış sorulara ve kaynaklara tek tıkla ulaş.</p>
+                </div>
+
+                <div class="text-slide">
+                    <h1>Topluluklara<br>Hemen Katıl</h1>
+                    <p class="description">İlgi alanlarına uygun kulüpleri keşfet, etkinliklerden haberdar ol ve yeni arkadaşlar edin.</p>
+                </div>
+
+                <div class="text-slide">
+                    <h1>Kariyerini<br>Şimdiden Planla</h1>
+                    <p class="description">Staj fırsatları, mezun tavsiyeleri ve sektör buluşmaları ile geleceğine yön ver.</p>
+                </div>
+
+                <div class="text-slide">
+                    <h1>Soru Sor<br>Cevap Bul</h1>
+                    <p class="description">Takıldığın konularda diğer öğrencilere soru sor, bilgi paylaşımının gücünü keşfet.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="right-section">
+            <div class="login-box">
+                <h2>Hesabına Giriş Yap</h2>
+                <form asp-action="Login" method="post" id="login-form">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="input-group">
+                        <label for="email">Email Adresi</label>
+                        <div class="input-field">
+                            <i class="fa-regular fa-user input-icon"></i>
+                            <input asp-for="Email" type="email" id="email" placeholder="Email adresini gir" required>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="password">Şifre</label>
+                        <div class="input-field">
+                            <i class="fa-solid fa-lock input-icon"></i>
+                            <input asp-for="Password" type="password" id="password" placeholder="Şifreni gir" required>
+                            <i class="fa-regular fa-eye toggle-password" id="togglePassword"></i>
+                        </div>
+                    </div>
+                    <div class="form-group form-check mb-3">
+                        <input class="form-check-input" asp-for="RememberMe" />
+                        <label class="form-check-label" asp-for="RememberMe"></label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Giriş Yap</button>
+                    <p class="signup-link">
+                        Hesabın yok mu? <a href="sign-up.html">Kayıt Ol</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/login.js"></script>
+</body>
+</html>

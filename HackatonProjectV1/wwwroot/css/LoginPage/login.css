@@ -1,0 +1,214 @@
+/* Genel Ayarlar */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    background-color: #0d1117;
+    color: #ffffff;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Taşmaları engelle */
+}
+
+.main-container {
+    display: flex;
+    width: 100%;
+    max-width: 1100px;
+    height: 600px; /* Sabit yükseklik verdim ki slider oynarken sayfa zıplamasın */
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+}
+
+/* === SOL TARAF === */
+.left-section {
+    flex: 1;
+    padding-right: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    position: relative; /* Slider için referans noktası */
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 40px; /* Logo ile yazı arası boşluk */
+    position: absolute;
+    top: 50px; /* Logoyu yukarı sabitledik */
+    left: 0;
+    z-index: 10;
+}
+
+.logo-icon {
+    color: #1d9bf0;
+    font-size: 32px;
+    margin-right: 10px;
+}
+
+/* --- SLIDER ALANI --- */
+.text-slider {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    margin-top: 60px;
+    overflow: hidden; /* Taşmaları gizle */
+}
+
+.text-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    
+    /* 1. DURUM: Bekleme (Varsayılan) - Yukarıda gizli */
+    opacity: 0;
+    transform: translateY(-30px); 
+    
+    transition: all 0.8s ease-in-out; /* Animasyon hızı */
+    pointer-events: none;
+}
+
+/* 2. DURUM: Aktif - Ekranda Görünür (Ortada) */
+.text-slide.active {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: all;
+    z-index: 2;
+}
+
+/* 3. DURUM: Çıkış - Aşağı kayıp kaybolur */
+.text-slide.exit {
+    opacity: 0;
+    transform: translateY(30px); /* Aşağı doğru gider */
+    z-index: 1;
+}
+
+.text-slide h1 {
+    font-size: 64px;
+    line-height: 1.1;
+    font-weight: 800;
+    margin-bottom: 20px;
+    letter-spacing: -1px;
+}
+
+.text-slide .description {
+    font-size: 18px;
+    color: #8b949e;
+    line-height: 1.5;
+    max-width: 480px;
+}
+
+/* === SAĞ TARAF (FORM) === */
+.right-section {
+    flex: 0 0 400px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.login-box {
+    width: 100%;
+}
+
+h2 {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 30px;
+    color: #ffffff;
+}
+
+/* Form Elemanları */
+.input-group { margin-bottom: 20px; }
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #c9d1d9;
+}
+
+.input-field {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-field input {
+    width: 100%;
+    padding: 12px 40px;
+    background-color: #0d1117;
+    border: 1px solid #30363d;
+    border-radius: 6px;
+    font-size: 15px;
+    color: #ffffff;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.input-field input:focus { border-color: #1d9bf0; }
+
+.input-icon {
+    position: absolute;
+    left: 15px;
+    color: #8b949e;
+    font-size: 16px;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 15px;
+    color: #8b949e;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.btn-primary {
+    width: 100%;
+    padding: 15px;
+    background-color: #1d9bf0;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
+.btn-primary:hover { background-color: #1a8cd8; }
+
+.signup-link {
+    text-align: center;
+    font-size: 16px;
+    color: #8b949e;
+}
+
+.signup-link a {
+    color: #1d9bf0;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    body { overflow-y: auto; height: auto; padding: 40px 0; }
+    .main-container { flex-direction: column; text-align: center; height: auto; }
+    .left-section { padding-right: 0; margin-bottom: 40px; height: 350px; }
+    .logo { position: relative; top: 0; justify-content: center; margin-bottom: 20px; }
+    .text-slider { height: 250px; margin-top: 0; }
+    .text-slide h1 { font-size: 42px; }
+    .right-section { width: 100%; max-width: 400px; height: auto; }
+}
