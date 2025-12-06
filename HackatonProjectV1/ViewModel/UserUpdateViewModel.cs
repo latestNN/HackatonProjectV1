@@ -5,7 +5,9 @@ namespace HackatonProjectV1.ViewModel
 {
     public class UserUpdateViewModel
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
+
+        public bool IsApproved { get; set; }
 
         [Display(Name = "Üniversite")]
         [Required(ErrorMessage = "Üniversite alanı boş geçilemez")]

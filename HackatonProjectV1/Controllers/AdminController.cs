@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HackatonProjectV1.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         private readonly UserManager<AppUser> _userManager;
@@ -35,7 +35,12 @@ namespace HackatonProjectV1.Controllers
         [HttpPost]
         public async Task<IActionResult> ApproveStudent(UserUpdateViewModel model)
         {
-            var user = await _userManager.Users.FirstOrDefault(x => x.Id == model.Id);
+            
+            var user = await _userManager.FindByIdAsync(model.Id);
+            if (user == null)
+            {
+                return View("Yarrak");
+            }
 
             user.IsApproved = true;
             user.University = model.University;

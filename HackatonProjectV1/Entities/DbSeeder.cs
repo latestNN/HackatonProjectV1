@@ -8,11 +8,11 @@ namespace HackatonProjectV1.Entities
         {
             
             var userManager = service.GetService<UserManager<AppUser>>();
-            var roleManager = service.GetService<RoleManager<IdentityRole<int>>>();
+            var roleManager = service.GetService<RoleManager<IdentityRole>>();
 
             
-            await roleManager.CreateAsync(new IdentityRole<int>("Admin"));
-            await roleManager.CreateAsync(new IdentityRole<int>("Member"));
+            await roleManager.CreateAsync(new IdentityRole("Admin"));
+            await roleManager.CreateAsync(new IdentityRole("Member"));
 
             
             var adminUser = await userManager.FindByEmailAsync("admin@gmail.com");
