@@ -62,7 +62,7 @@
                             <label for="fullname"> File</label>
                             <div class="input-field">
                                 <i class="fa-regular fa-id-card input-icon"></i>
-                                <input asp-for="StudentDocumentPath" type="text" id="fullname" placeholder="Ad Soyad" >
+                                <input asp-for="StudentBarcode" type="text" id="fullname" placeholder="Ad Soyad" >
                             </div>
                         </div>
                         <div class="input-group">
@@ -101,16 +101,7 @@
                         </div>
                     </div>
 
-                    <div class="input-group file-upload-group">
-                        <label for="student-doc">Öğrenci Belgesi (PDF)</label>
-                        <div class="file-upload-wrapper">
-                            <input type="file" id="student-doc" accept=".pdf" >
-                            <div class="file-upload-display">
-                                <i class="fa-solid fa-cloud-arrow-up"></i>
-                                <span id="file-name">Dosya seçilmedi</span>
-                            </div>
-                        </div>
-                    </div>
+         
 
                     <button type="submit" class="btn btn-primary">Kayıt Ol</button>
 

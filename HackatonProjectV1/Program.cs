@@ -13,7 +13,7 @@ builder.Services.AddDbContext<HtContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 
-builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
+builder.Services.AddIdentity<AppUser, IdentityRole<int>>(options =>
 {
     options.Password.RequireDigit = false; // Rakam zorunluluðu kalksýn
     options.Password.RequiredLength = 6;   // En az 6 karakter

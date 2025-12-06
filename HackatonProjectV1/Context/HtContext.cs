@@ -1,10 +1,11 @@
-﻿using HackatonProjectV1.Entities;
+﻿ using HackatonProjectV1.Entities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace HackatonProjectV1.Context
 {
-    public class HtContext : IdentityDbContext<AppUser>
+    public class HtContext : IdentityDbContext<AppUser, IdentityRole<int> , int>
     {
         public HtContext(DbContextOptions<HtContext> options) : base(options)
         { 

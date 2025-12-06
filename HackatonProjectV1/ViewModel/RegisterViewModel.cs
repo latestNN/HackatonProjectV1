@@ -19,7 +19,7 @@ namespace HackatonProjectV1.ViewModel
 
         [Required(ErrorMessage = "Öğrenci Belgesi zorunludur.")]
         [Display(Name = "Öğrenci Belgesi")]
-        public string StudentDocumentPath { get; set; }
+        public string StudentBarcode { get; set; }
         [Required(ErrorMessage = "Email zorunludur.")]
         [EmailAddress]
         public string Email { get; set; }

@@ -3,6 +3,7 @@ using HackatonProjectV1.Services;
 using HackatonProjectV1.ViewModel;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
 
 namespace HackatonProjectV1.Controllers
 {
@@ -46,7 +47,8 @@ namespace HackatonProjectV1.Controllers
                     FirstName = model.FirstName,
                     LastName = model.LastName,
                     TcNo = model.TcNo,
-                    StudentDocumentPath = model.StudentDocumentPath
+                    StudentBarcode = model.StudentBarcode,
+                    IsApproved = false // Yeni kullanıcılar başlangıçta onaylı değil
                 };
 
                 // 2. Kullanıcıyı oluştur (Şifreyi otomatik hash'ler)
@@ -56,7 +58,8 @@ namespace HackatonProjectV1.Controllers
                 {
                     // Başarılıysa kullanıcıyı içeri al (Login yap) ve Anasayfaya gönder
                     await _signInManager.SignInAsync(user, isPersistent: false);
-                    return RedirectToAction("Index", "Home");
+                    //TempData["barcode"] = model.StudentBarcode;                    
+                    return RedirectToAction("Verify");
                 }
 
                 // Hata varsa (örn: Bu email zaten kayıtlı), hataları modele ekle
@@ -70,6 +73,10 @@ namespace HackatonProjectV1.Controllers
             return View(model);
         }
 
+        public IActionResult Verify()
+        {
+            return View();
+        }
 
         [HttpGet]
         public IActionResult Login()
@@ -110,12 +117,18 @@ namespace HackatonProjectV1.Controllers
             
         }
 
-        public async Task<IActionResult> Dogrula(string barcode)
-        {
-            var sonuc = await _eDevletService.DogrulaAsyn("BARKOD_NUMARASI_HERE");
+        //public async Task<IActionResult> Dogrula()
+        //{
+        //    if (TempData["barcode"] == null)
+        //        return RedirectToAction("Index");
+        //    var barcode = TempData["barcode"].ToString();            
+        //    var sonuc = await _eDevletService.DogrulaAsyn(barcode);
+        //    var model = JsonSerializer.Deserialize<BelgeSonuc>(sonuc);
+        //    var user = await _userManager.GetUserAsync(User);
+        //    user.IsApproved = model.durum;
 
-            return Content(sonuc, "application/json");
-        }
+        //   return RedirectToAction("Index", "Home");
+        //}
 
     }
 }   
