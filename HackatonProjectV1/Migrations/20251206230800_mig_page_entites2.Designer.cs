@@ -4,6 +4,7 @@ using HackatonProjectV1.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HackatonProjectV1.Migrations
 {
     [DbContext(typeof(HtContext))]
-    partial class HtContextModelSnapshot : ModelSnapshot
+    [Migration("20251206230800_mig_page_entites2")]
+    partial class mig_page_entites2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -37,6 +40,9 @@ namespace HackatonProjectV1.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("DepartmantId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Department")
                         .HasColumnType("nvarchar(max)");
 
@@ -49,6 +55,9 @@ namespace HackatonProjectV1.Migrations
 
                     b.Property<string>("Faculty")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("FacultyId")
+                        .HasColumnType("int");
 
                     b.Property<bool>("IsApproved")
                         .HasColumnType("bit");
@@ -107,10 +116,9 @@ namespace HackatonProjectV1.Migrations
                     b.Property<int?>("departmentId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("facultyId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
+
+                    b.HasIndex("FacultyId");
 
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
@@ -123,8 +131,6 @@ namespace HackatonProjectV1.Migrations
                     b.HasIndex("UniversityId");
 
                     b.HasIndex("departmentId");
-
-                    b.HasIndex("facultyId");
 
                     b.ToTable("AspNetUsers", (string)null);
                 });
@@ -141,7 +147,7 @@ namespace HackatonProjectV1.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("CreateTime")
+                    b.Property<DateTime>("CreateTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("UserId")
@@ -168,6 +174,9 @@ namespace HackatonProjectV1.Migrations
                     b.Property<DateTime?>("CreateTime")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("DepartmenId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
@@ -192,8 +201,8 @@ namespace HackatonProjectV1.Migrations
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int?>("departmentId")
-                        .HasColumnType("int");
+                    b.Property<string>("UsertId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -410,6 +419,10 @@ namespace HackatonProjectV1.Migrations
 
             modelBuilder.Entity("HackatonProjectV1.Entities.AppUser", b =>
                 {
+                    b.HasOne("HackatonProjectV1.Entities.MainPageElements.Faculty", "faculty")
+                        .WithMany("appUsers")
+                        .HasForeignKey("FacultyId");
+
                     b.HasOne("HackatonProjectV1.Entities.MainPageElements.University", "university")
                         .WithMany("appUsers")
                         .HasForeignKey("UniversityId");
@@ -417,10 +430,6 @@ namespace HackatonProjectV1.Migrations
                     b.HasOne("HackatonProjectV1.Entities.MainPageElements.Department", "department")
                         .WithMany("appUsers")
                         .HasForeignKey("departmentId");
-
-                    b.HasOne("HackatonProjectV1.Entities.MainPageElements.Faculty", "faculty")
-                        .WithMany("appUsers")
-                        .HasForeignKey("facultyId");
 
                     b.Navigation("department");
 

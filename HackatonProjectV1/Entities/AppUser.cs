@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using HackatonProjectV1.Entities.MainPageElements;
+using Microsoft.AspNetCore.Identity;
 
 namespace HackatonProjectV1.Entities
 {
@@ -16,5 +17,21 @@ namespace HackatonProjectV1.Entities
         public string? Faculty { get; set; }
         public string? Department { get; set; }
         public string? Class { get; set; }
+
+        public ICollection<Content> contents { get; set; }
+
+        public ICollection<Comments> comments { get; set; }
+
+        public int? UniversityId { get; set; }
+
+        public University? university { get; set; }
+
+        public int? facultyId { get; set; }
+
+        public Faculty? faculty { get; set; }
+
+        public int? departmentId { get; set; }
+
+        public Department? department { get; set; }
     }
 }

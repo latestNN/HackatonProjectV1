@@ -39,7 +39,7 @@ namespace HackatonProjectV1.Controllers
             var user = await _userManager.FindByIdAsync(model.Id);
             if (user == null)
             {
-                return View("Yarrak");
+                return View("Index");
             }
 
             user.IsApproved = true;
