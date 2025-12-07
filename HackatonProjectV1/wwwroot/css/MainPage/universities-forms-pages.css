@@ -1,0 +1,478 @@
+/* --- TEMEL AYARLAR VE RENKLER --- */
+:root {
+    --bg-dark: #0f1115;       /* Ana arka plan */
+    --card-bg: #161920;       /* Kart arka planı */
+    --border-color: #2a2e35;  /* Kenarlık rengi */
+    --primary-blue: #2563eb;  /* Ana mavi renk */
+    --text-main: #e2e8f0;     /* Beyazımsı metin */
+    --text-muted: #94a3b8;    /* Gri metin */
+    --badge-blue: #1d4ed8;
+    --badge-green: #059669;
+    --badge-red: #ef4444;     /* Kırmızı badge */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+}
+
+/* --- NAVBAR --- */
+.navbar {
+    background-color: var(--card-bg);
+    border-bottom: 1px solid var(--border-color);
+    padding: 0.8rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    position: relative; 
+}
+
+.logo {
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: var(--primary-blue);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 2; 
+}
+
+/* Linkleri Tam Ortalamak için Absolute Positioning */
+.nav-links {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%); 
+    display: flex;
+    align-items: center;
+}
+
+.nav-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 0.95rem;
+    transition: color 0.3s;
+    font-weight: 500;
+}
+
+.nav-links a:hover, .nav-links a.active {
+    color: var(--primary-blue);
+}
+
+/* Profil Linki */
+.user-profile {
+    z-index: 2;
+    text-decoration: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.avatar-circle {
+    width: 36px;
+    height: 36px;
+    background-color: var(--primary-blue);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.user-profile:hover .avatar-circle {
+    opacity: 0.9;
+    box-shadow: 0 0 10px rgba(37, 99, 235, 0.5);
+    transition: all 0.3s ease;
+}
+
+/* --- ANA DÜZEN (GRID) --- */
+.main-container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: 260px 1fr 260px; /* Sol - Orta - Sağ */
+    gap: 20px;
+    align-items: start;
+}
+
+/* --- SABİT YAN PANELLER (STICKY) --- */
+/* İçerik Ekle butonunu en alta itmek için Flex ve Height ekledik */
+.sticky-sidebar {
+    position: sticky;
+    top: 90px;
+    height: calc(100vh - 110px); 
+    display: flex;
+    flex-direction: column;
+}
+
+/* Kart Genel Stil */
+.card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+h3 {
+    font-size: 1rem;
+    margin-bottom: 15px;
+}
+
+/* --- ARAMA KUTUSU --- */
+.search-box {
+    background-color: #0f1115;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    color: var(--text-muted);
+}
+
+.search-box input {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--text-main);
+    margin-left: 10px;
+    width: 100%;
+}
+
+/* --- SEKMELER (TABS) --- */
+.tabs-container {
+    background-color: var(--card-bg);
+    padding: 6px;
+    border-radius: 50px;
+    border: 1px solid var(--border-color);
+    margin-bottom: 20px;
+}
+
+.filter-tabs {
+    display: flex;
+    justify-content: space-between;
+    gap: 5px;
+}
+
+.tab {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    padding: 10px 0;
+    border-radius: 40px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    font-size: 0.95rem;
+}
+
+.tab.active {
+    background-color: var(--primary-blue);
+    color: white;
+    box-shadow: 0 2px 10px rgba(37, 99, 235, 0.3);
+}
+
+.tab:hover:not(.active) {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* --- DROPDOWN MENÜ STİLLERİ --- */
+.dropdown-container {
+    position: relative;
+    flex: 1;
+}
+
+.dropdown-container .tab {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 110%;
+    left: 0;
+    width: 100%;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    z-index: 100;
+    
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+}
+
+.dropdown-menu.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-item {
+    padding: 12px 15px;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    cursor: pointer;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    transition: background 0.2s, color 0.2s;
+}
+
+.dropdown-item:last-child {
+    border-bottom: none;
+}
+
+.dropdown-item:hover {
+    background-color: rgba(37, 99, 235, 0.1);
+    color: var(--primary-blue);
+}
+
+.dropdown-btn i {
+    transition: transform 0.3s;
+    font-size: 0.8rem;
+}
+
+.dropdown-container.active .dropdown-btn i {
+    transform: rotate(180deg);
+}
+
+/* --- İÇERİK GİZLEME / GÖSTERME --- */
+.content-section {
+    display: none;
+    animation: fadeIn 0.4s ease;
+}
+
+.content-section.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- GÖNDERİ KARTLARI (POST CARD) --- */
+/* Detay sayfasına geçiş için tıklanabilir yapıyoruz */
+.post-card {
+    cursor: pointer;
+    transition: transform 0.2s, border-color 0.2s;
+}
+
+.post-card:hover {
+    border-color: var(--primary-blue);
+    transform: translateY(-2px);
+}
+
+.post-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 15px;
+}
+
+.user-info { display: flex; gap: 12px; }
+
+.avatar {
+    width: 40px; height: 40px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: bold; color: white;
+}
+.av-green { background-color: #10b981; }
+.av-orange { background-color: #f97316; }
+.av-blue { background-color: #3b82f6; }
+.av-purple { background-color: #8b5cf6; }
+
+.meta { display: flex; flex-direction: column; }
+.username { font-weight: 600; font-size: 0.95rem; }
+.time { font-size: 0.8rem; color: var(--text-muted); margin-top: 2px; }
+
+.badge {
+    padding: 4px 10px; border-radius: 6px;
+    font-size: 0.7rem; font-weight: bold; text-transform: uppercase;
+}
+.badge-blue { color: #60a5fa; background-color: rgba(37, 99, 235, 0.2); }
+.badge-green { color: #34d399; background-color: rgba(5, 150, 105, 0.2); }
+.badge-red { color: #f87171; background-color: rgba(220, 38, 38, 0.2); }
+
+.post-title { font-size: 1.1rem; margin-bottom: 10px; }
+
+/* --- POST İÇERİĞİ (METİN KISITLAMASI ve TAŞMA ÖNLEME) --- */
+.post-content {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 15px;
+    
+    /* Uzun kelimeleri kırarak alt satıra at */
+    word-break: break-word; 
+    overflow-wrap: break-word;
+    
+    /* 2 Satırda kesip 3 nokta koyma (...) */
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Kaç satırda kesileceği */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    
+    /* Maksimum genişlik ayarı (Kutudan taşmayı engellemek için) */
+    max-width: 100%;
+}
+
+/* BUTONLAR (Like, Dislike, Yorum) */
+.post-actions { display: flex; gap: 15px; }
+
+.action-btn {
+    background: none; 
+    border: none; 
+    color: var(--text-muted);
+    cursor: pointer; 
+    font-size: 0.9rem;
+    display: flex; 
+    align-items: center; 
+    gap: 5px;
+    transition: color 0.2s;
+}
+
+.action-btn:hover { 
+    color: var(--text-main); 
+}
+
+/* Seçili (Aktif) olduğunda Mavi Renk */
+.action-btn.active {
+    color: var(--primary-blue);
+}
+
+/* --- SAĞ PANEL ETİKETLER --- */
+.tags-wrapper {
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 8px; 
+    margin-bottom: 20px;
+}
+
+.tags-wrapper input[type="checkbox"] {
+    display: none;
+}
+
+.tag-chip {
+    background-color: #21262d;
+    color: var(--text-muted);
+    padding: 8px 14px;
+    border-radius: 25px; 
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: all 0.2s ease;
+    user-select: none;
+}
+
+.tag-chip:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--text-main);
+}
+
+.tags-wrapper input[type="checkbox"]:checked + .tag-chip {
+    background-color: var(--primary-blue);
+    color: white;
+    border-color: var(--primary-blue);
+    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.4);
+}
+
+/* Filtrele Butonu */
+.filter-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--primary-blue);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.filter-btn:hover {
+    background-color: #1d4ed8;
+}
+
+/* --- İÇERİK EKLE BUTONU (EN ALTTA) --- */
+.add-content-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 12px;
+    background-color: var(--primary-blue);
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+    border-radius: 8px;
+    text-decoration: none; /* Link alt çizgisini kaldır */
+    transition: background 0.3s ease;
+    gap: 8px; 
+    
+    /* Butonu en alta iten kod */
+    margin-top: auto; 
+}
+
+.add-content-btn:hover {
+    background-color: #1d4ed8;
+}
+
+/* --- YENİ EKLENEN: METİN KISALTMA (Text Truncate) --- */
+/* Üniversite adı uzunsa butondan taşmasın, 3 nokta koysun */
+.text-truncate {
+    white-space: nowrap;      /* Alt satıra inmesin */
+    overflow: hidden;         /* Taşan kısmı gizle */
+    text-overflow: ellipsis;  /* Sonuna ... koy */
+    max-width: 250px;         /* Maksimum genişlik (İhtiyaca göre ayarla) */
+    display: inline-block;    /* Block davranışı göster */
+    vertical-align: middle;
+    padding: 10px 15px !important; /* Padding'i koru */
+}
+
+/* --- MOBİL UYUMLULUK --- */
+@media (max-width: 900px) {
+    .main-container {
+        grid-template-columns: 1fr;
+    }
+    .sidebar-left, .sidebar-right {
+        display: none;
+    }
+    .nav-links {
+        position: static;
+        transform: none;
+        display: none; 
+    }
+    .text-truncate {
+        max-width: 120px; 
+    }
+}

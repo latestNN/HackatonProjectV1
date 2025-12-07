@@ -1,0 +1,220 @@
+﻿@model HackatonProjectV1.ViewModel.MainpageDropBoxViewModel
+<main class="feed">
+
+    <div class="tabs-container">
+
+        <div class="filter-tabs">
+
+            <!-- ÜNİVERSİTE BUTONU (Şu an aktif değil ama ileride kullanılabilir) -->
+            <button class="tab active" id="btn-university" onclick="resetFilters()">@ViewBag.UniversityName</button>
+
+            <!-- FAKÜLTE DROPDOWN -->
+            <div class="dropdown-container">
+                <button class="tab dropdown-btn" id="btn-faculty-display">
+                    Fakülte <i class="fa-solid fa-chevron-down"></i>
+                </button>
+                <div class="dropdown-menu">
+                    <!-- Tüm Fakülteler Seçeneği -->
+                    <div class="dropdown-item" onclick="filterByFaculty('all', 'Tüm Fakülteler')">
+                        Tüm Fakülteler
+                    </div>
+                    @if (Model.Faculties != null)
+                    {
+                        foreach (var faculty in Model.Faculties)
+                        {
+                            <div class="dropdown-item"
+                                 onclick="filterByFaculty('@faculty.Id', '@faculty.Name')">
+                                @faculty.Name
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+
+            <!-- BÖLÜM DROPDOWN -->
+            <div class="dropdown-container">
+                <button class="tab dropdown-btn" id="btn-department-display">
+                    Bölüm <i class="fa-solid fa-chevron-down"></i>
+                </button>
+                <div class="dropdown-menu" id="department-menu">
+                    <div class="dropdown-item department-item" data-faculty-id="all">
+                        Lütfen önce fakülte seçiniz
+                    </div>
+                    @if (Model.Departments != null)
+                    {
+                        foreach (var dept in Model.Departments)
+                        {
+                            <div class="dropdown-item department-item"
+                                 data-faculty-id="@dept.FacultyId"
+                                 onclick="filterByDepartment('@dept.Id', '@dept.Name')">
+                                @dept.Name
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- İÇERİK LİSTESİ -->
+    <div id="content-area" class="content-section active">
+        @if (Model.Contents != null)
+        {
+            foreach (var item in Model.Contents)
+            {
+                <!--
+                    ÖNEMLİ DEĞİŞİKLİK:
+                    Her post kartına FacultyId ve DepartmentId'yi data attribute olarak ekledik.
+                    Bu sayede JavaScript ile bunları tanıyıp gizleyip açabileceğiz.
+                -->
+                <article onclick="window.location.href = '/Main/ContentDetails/@item.Id'" class="card post-card"
+                         data-faculty-id="@item.FacultyId"
+                         data-department-id="@item.departmentId">
+
+                    <div class="post-header">
+                        <div class="user-info">
+                            <div class="avatar av-green">AV</div>
+                            <div class="meta">
+                                <span class="username">@(item.User?.UserName ?? "Anonim")</span>
+                                <span class="time">@item.CreateTime</span>
+                            </div>
+                        </div>
+                        <span class="badge badge-blue">@(item.Label != null ? item.Label.ToString() : "Genel")</span>
+                    </div>
+                    <h2 class="post-title">@item.Title</h2>
+                    <p class="post-content">
+                        @item.Description
+                    </p>
+                    <div class="post-actions">
+                        <button class="action-btn btn-like"><i class="fa-regular fa-thumbs-up"></i> @item.Like</button>
+                        <button class="action-btn btn-dislike"><i class="fa-regular fa-thumbs-down"></i> @item.Dislike</button>
+                        <button class="action-btn btn-comment"><i class="fa-regular fa-comment"></i> 12</button>
+                    </div>
+                </article>
+            }
+        }
+        else
+        {
+            <div style="padding:20px; text-align:center; color:#94a3b8;">
+                Hiç içerik bulunamadı.
+            </div>
+        }
+    </div>
+
+</main>
+
+<script>
+    // --- DROPDOWN AÇMA / KAPAMA MANTIĞI ---
+    document.addEventListener("DOMContentLoaded", function() {
+        var dropdownBtns = document.querySelectorAll(".dropdown-btn");
+
+        dropdownBtns.forEach(function(btn) {
+            btn.addEventListener("click", function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                var container = this.closest(".dropdown-container");
+                var menu = container.querySelector(".dropdown-menu");
+
+                document.querySelectorAll(".dropdown-menu.show").forEach(function(openMenu) {
+                    if (openMenu !== menu) {
+                        openMenu.classList.remove("show");
+                        openMenu.closest(".dropdown-container").classList.remove("active");
+                    }
+                });
+
+                if (menu) {
+                     menu.classList.toggle("show");
+                     container.classList.toggle("active");
+                }
+            });
+        });
+
+        document.addEventListener("click", function() {
+            document.querySelectorAll(".dropdown-menu.show").forEach(function(menu) {
+                menu.classList.remove("show");
+                menu.closest(".dropdown-container").classList.remove("active");
+            });
+        });
+    });
+
+    // --- FİLTRELEME FONKSİYONLARI ---
+
+    // 1. FAKÜLTE SEÇİMİ
+    function filterByFaculty(facultyId, facultyName) {
+        // Buton yazılarını güncelle
+        document.getElementById('btn-faculty-display').innerHTML = facultyName + ' <i class="fa-solid fa-chevron-down"></i>';
+        document.getElementById('btn-department-display').innerHTML = 'Bölüm <i class="fa-solid fa-chevron-down"></i>';
+
+        // 1. Bölüm Dropdown Listesini Güncelle (Sadece ilgili fakültenin bölümlerini göster)
+        var departmentItems = document.getElementsByClassName('department-item');
+        for (var i = 0; i < departmentItems.length; i++) {
+            var item = departmentItems[i];
+            var parentId = item.getAttribute('data-faculty-id');
+
+            if (facultyId === 'all') {
+                item.style.display = 'block';
+            } else if (parentId === facultyId) {
+                item.style.display = 'block';
+            } else {
+                item.style.display = 'none';
+            }
+        }
+
+        // 2. Postları Filtrele
+        var posts = document.querySelectorAll('.post-card');
+        posts.forEach(function(post) {
+            var postFacultyId = post.getAttribute('data-faculty-id');
+
+            if (facultyId === 'all') {
+                post.style.display = 'block'; // Hepsini göster
+            } else if (postFacultyId === facultyId) {
+                post.style.display = 'block'; // Eşleşeni göster
+            } else {
+                post.style.display = 'none'; // Gizle
+            }
+        });
+    }
+
+    // 2. BÖLÜM SEÇİMİ
+    function filterByDepartment(departmentId, deptName) {
+        document.getElementById('btn-department-display').innerHTML = deptName + ' <i class="fa-solid fa-chevron-down"></i>';
+
+        // Postları Bölüme Göre Filtrele
+        var posts = document.querySelectorAll('.post-card');
+        posts.forEach(function(post) {
+            var postDeptId = post.getAttribute('data-department-id');
+
+            // Not: departmentId string olarak geliyor, attribute da string. Karşılaştırma güvenli.
+            // HTML attribute'ları her zaman string döner.
+            if (postDeptId === departmentId) {
+                post.style.display = 'block';
+            } else {
+                post.style.display = 'none';
+            }
+        });
+    }
+
+    // 3. SEÇİMLERİ SIFIRLA (Tümü Butonu için)
+    function resetFilters() {
+        document.getElementById('btn-faculty-display').innerHTML = 'Fakülte <i class="fa-solid fa-chevron-down"></i>';
+        document.getElementById('btn-department-display').innerHTML = 'Bölüm <i class="fa-solid fa-chevron-down"></i>';
+
+        // Hepsini göster
+        var posts = document.querySelectorAll('.post-card');
+        posts.forEach(function(post) {
+            post.style.display = 'block';
+        });
+
+        // Dropdown içindeki bölümleri de sıfırla (hepsini göster veya gizle, tercihen başa dön)
+        var departmentItems = document.getElementsByClassName('department-item');
+        for (var i = 0; i < departmentItems.length; i++) {
+             // Varsayılan olarak fakülte seçilmeden bölümleri göstermek istemiyorsak display='none' yapabiliriz
+             // Ya da 'Tüm Fakülteler' gibi hepsini açabiliriz. Şimdilik 'Tümü' seçince hepsi açık kalsın:
+             item.style.display = 'block';
+        }
+    }
+
+
+</script>

@@ -1,0 +1,83 @@
+﻿@model List<HackatonProjectV1.Entities.MainPageElements.University>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Üniversiteler - UniForum</title>
+    <link rel="stylesheet" href="~/css/MainPage/universities.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fa-solid fa-graduation-cap"></i> UniForum
+            </div>
+
+            <nav class="nav-links">
+                <a href="index.html">Ana Sayfa</a>
+                <a href="universities.html" class="active">Üniversiteler</a>
+                <a href="#">Forumlar</a>
+            </nav>
+
+            <div class="user-profile">
+                <div class="avatar-circle">KY</div>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-container">
+
+        <section class="hero-section">
+            <h1>Üniversiteler</h1>
+
+            <div class="search-wrapper">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="uniSearchInput" placeholder="Üniversite adı veya şehir ara...">
+            </div>
+        </section>
+
+        <section class="universities-list" id="uniList">
+            <div class="list-header">
+                <div class="header-col col-name">Üniversite</div>
+                <div class="header-col col-city">Şehir</div>
+                <div class="header-col col-stat">Öğrenci Sayısı</div>
+                <div class="header-col col-stat">Fakülte Sayısı</div>
+                <div class="header-col col-action"></div>
+            </div>
+
+            <div class="header-divider"></div>
+
+            @foreach (var item in Model)
+            {
+                <a href="/Main/UnivercityForum/@item.Id" class="uni-row" data-name="@item.Name" data-city="İstanbul">
+                    <div class="col-name">@item.Name</div>
+                    <div class="col-city"><i class="fa-solid fa-location-dot"></i> @item.City</div>
+                    <div class="col-stat"><i class="fa-solid fa-user-graduate"></i> 40.000+</div>
+                    <div class="col-stat"><i class="fa-solid fa-building-columns"></i> 13 Fakülte</div>
+                    <div class="col-action"><button class="btn-visit">Foruma Git</button></div>
+                </a>
+            }
+
+            
+
+            
+
+            <div id="noResult" style="display: none; text-align: center; color: #94a3b8; padding: 40px;">
+                <i class="fa-regular fa-face-frown" style="font-size: 2rem; margin-bottom: 10px;"></i>
+                <p>Aradığınız kriterlere uygun üniversite bulunamadı.</p>
+            </div>
+
+        </section>
+
+    </div>
+
+    <script src="~/js/MainPage/universities.js"></script>
+</body>
+</html>

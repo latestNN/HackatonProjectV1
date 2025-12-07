@@ -72,5 +72,17 @@ namespace HackatonProjectV1.Controllers
             _context.SaveChanges();
             return RedirectToAction("ContentDetails", new { id = contenttId});
         }
+
+        public IActionResult UnivercityList()
+        {
+            var values = _context.universities.ToList();
+            return View(values);
+        }
+
+        public IActionResult UnivercityForum(int id)
+        {
+            var values = _context.universities.Find(id);
+            return View(values);
+        }
     }
 }

@@ -1,0 +1,64 @@
+﻿@model HackatonProjectV1.Entities.MainPageElements.University
+@{
+    Layout = null;
+	
+}
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniForum</title>
+    <link rel="stylesheet" href="~/css/MainPage/index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fa-solid fa-graduation-cap"></i> UniForum
+            </div>
+
+            <nav class="nav-links">
+                <a href="index.html" class="active">Ana Sayfa</a>
+                <a href="universities.html">Üniversiteler</a>
+                <a href="#">Forumlar</a>
+            </nav>
+
+            <a href="profile.html" class="user-profile">
+                <div class="avatar-circle">KY</div>
+            </a>
+        </div>
+    </header>
+
+    <div class="main-container">
+
+        <aside class="sidebar-left sticky-sidebar">
+            <div class="card search-card">
+                <h3>Ara</h3>
+                <div class="search-box">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" placeholder="Konu, başlık veya etiket ara...">
+                </div>
+            </div>
+        </aside>
+
+        @await Component.InvokeAsync("UniContent", new {university = Model})
+
+
+        <aside class="sidebar-right sticky-sidebar">
+            @await Component.InvokeAsync("Filter")
+
+
+            <a href="add-contect.html" class="add-content-btn">
+                <i class="fa-solid fa-plus"></i> İçerik Ekle
+            </a>
+
+        </aside>
+
+    </div>
+
+    <script src="~/js/MainPage/"></script>
+</body>
+</html>
