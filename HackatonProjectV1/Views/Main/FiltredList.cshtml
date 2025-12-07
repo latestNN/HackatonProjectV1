@@ -1,0 +1,134 @@
+﻿@model List<HackatonProjectV1.Entities.MainPageElements.Content>
+@{
+    Layout = null;
+}
+
+
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniForum</title>
+    <link rel="stylesheet" href="~/css/MainPage/index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fa-solid fa-graduation-cap"></i> UniForum
+            </div>
+
+            <nav class="nav-links">
+                <a href="index.html" class="active">Ana Sayfa</a>
+                <a href="universities.html">Üniversiteler</a>
+                <a href="#">Forumlar</a>
+            </nav>
+
+            <a href="profile.html" class="user-profile">
+                <div class="avatar-circle">KY</div>
+            </a>
+        </div>
+    </header>
+
+    <div class="main-container">
+
+        <aside class="sidebar-left sticky-sidebar">
+            <div class="card search-card">
+                <h3>Ara</h3>
+                <div class="search-box">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" placeholder="Konu, başlık veya etiket ara...">
+                </div>
+            </div>
+        </aside>
+
+        
+        <main class="feed">
+
+            <div class="tabs-container">
+
+                <div class="filter-tabs">
+
+                    <button class="tab active" id="btn-university" data-target="content-universite">Üniversite</button>
+
+                    <div class="dropdown-container">
+                        <button class="tab dropdown-btn">
+                            Fakülte <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                        <div class="dropdown-menu">
+                            <div class="dropdown-item" data-target="content-fakulte-muhendislik" data-filter="muhendislik">Mühendislik Fak.</div>
+                            <div class="dropdown-item" data-target="content-fakulte-tip" data-filter="tip">Tıp Fakültesi</div>
+                            <div class="dropdown-item" data-target="content-fakulte-hukuk" data-filter="hukuk">Hukuk Fakültesi</div>
+                            <div class="dropdown-item" data-target="content-bolum-mimarlik" data-filter="mimarlik">Mimarlık Fakültesi</div>
+                        </div>
+                    </div>
+
+                    <div class="dropdown-container">
+                        <button class="tab dropdown-btn" id="btn-department">
+                            Bölüm <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                        <div class="dropdown-menu" id="department-menu">
+                            <div class="dropdown-item" data-target="content-bolum-yazilim" data-category="muhendislik">Yazılım Müh.</div>
+                            <div class="dropdown-item" data-target="content-bolum-yazilim" data-category="muhendislik">Bilgisayar Müh.</div>
+                            <div class="dropdown-item" data-target="content-bolum-mimarlik" data-category="mimarlik">Mimarlık</div>
+                            <div class="dropdown-item" data-target="content-fakulte-tip" data-category="tip">Tıp (Genel)</div>
+                            <div class="dropdown-item" data-target="content-fakulte-hukuk" data-category="hukuk">Hukuk (Genel)</div>
+                            <div class="dropdown-item" data-target="content-bolum-psikoloji" data-category="fenedebiyat">Psikoloji</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div id="content-universite" class="content-section active">
+                @foreach (var item in Model)
+                {
+                    <article class="card post-card">
+                        <div class="post-header">
+                            <div class="user-info">
+                                <div class="avatar av-green">AV</div>
+                                <div class="meta"><span class="username">@item.User.UserName</span><span class="time">@item.CreateTime</span></div>
+                            </div>
+                            <span class="badge badge-blue">@item.Label.ToString()</span>
+                        </div>
+                        <h2 class="post-title">@item.Title</h2>
+                        <p class="post-content">
+                            @item.Description
+                        </p>
+                        <div class="post-actions">
+                            <button class="action-btn btn-like"><i class="fa-regular fa-thumbs-up"></i> @item.Like</button>
+                            <button class="action-btn btn-dislike"><i class="fa-regular fa-thumbs-down"></i> @item.Dislike</button>
+                            <button class="action-btn btn-comment"><i class="fa-regular fa-comment"></i> 12</button>
+                        </div>
+                    </article>
+                }
+
+
+
+            </div>
+
+
+
+        </main>
+
+
+        <aside class="sidebar-right sticky-sidebar">
+            @* @await Component.InvokeAsync("Filter") *@
+
+
+            <a href="add-contect.html" class="add-content-btn">
+                <i class="fa-solid fa-plus"></i> İçerik Ekle
+            </a>
+
+        </aside>
+
+    </div>
+
+    <script src="js/index.js"></script>
+</body>
+</html>
+

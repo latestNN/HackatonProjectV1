@@ -84,20 +84,40 @@
 
                             <div class="form-row">
                                 <div class="input-group">
-                                    <label>Üniversite</label>
-                                    <input asp-for="University" type="text" value="İstanbul Teknik Üniversitesi">
+                                    <label asp-for="UniversityId">Üniversi</label>
+                                    <select asp-for="UniversityId"
+                                            asp-items="ViewBag.UniversityList"
+                                            class="form-control">
+                                        <option value="">Lütfen bir üniversite seçiniz</option>
+                                    </select>
+
+                                    <span asp-validation-for="UniversityId" class="text-danger"></span>
                                 </div>
 
                                 <div class="input-group">
-                                    <label>Fakülte</label>
-                                    <input asp-for="Faculty" type="text" value="Bilgisayar ve Bilişim Fak.">
+                                    <span asp-validation-for="facultyId" class="text-danger"></span>
+                                    <label asp-for="facultyId">Fakülte</label>
+                                    <select asp-for="facultyId"
+                                            asp-items="ViewBag.FacultyList"
+                                            class="form-control">
+                                        <option value="">Lütfen bir fakülte seçiniz</option>
+                                    </select>
+
+                                    <span asp-validation-for="facultyId" class="text-danger"></span>
                                 </div>
                             </div>
 
                             <div class="form-row">
                                 <div class="input-group">
-                                    <label>Bölüm</label>
-                                    <input asp-for="Department" type="text" value="Bilgisayar Mühendisliği">
+                                    <span asp-validation-for="departmentId" class="text-danger"></span>
+                                    <label asp-for="departmentId">Bölüm</label>
+                                    <select asp-for="departmentId"
+                                            asp-items="ViewBag.DepartmentList"
+                                            class="form-control">
+                                        <option value="">Lütfen bir bölüm seçiniz</option>
+                                    </select>
+
+                                    <span asp-validation-for="departmentId" class="text-danger"></span>
                                 </div>
 
                                 <div class="input-group">

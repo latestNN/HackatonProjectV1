@@ -8,21 +8,24 @@ namespace HackatonProjectV1.ViewModel
         public string Id { get; set; }
 
         public bool IsApproved { get; set; }
-
         [Display(Name = "Üniversite")]
-        [Required(ErrorMessage = "Üniversite alanı boş geçilemez")]
-        public string University { get; set; }
+        [Required(ErrorMessage = "Lütfen üniversite seçiniz")]
+        public int UniversityId { get; set; } // Artık string değil int tutuyoruz
 
         [Display(Name = "Fakülte")]
-        [Required(ErrorMessage = "Fakülte alanı boş geçilemez")]
-        public string Faculty { get; set; }
-        
+        [Required(ErrorMessage = "Lütfen fakülte seçiniz")]
+        public int facultyId { get; set; } // Artık string değil int tutuyoru
+
         [Display(Name = "Bölüm")]
-        [Required(ErrorMessage = "Bölüm alanı boş geçilemez")]
-        public string Department { get; set; }
+        [Required(ErrorMessage = "Lütfen bölüm seçiniz")]
+        public int departmentId { get; set; } // Artık string değil int tutuyoru
+
+        
         
         [Display(Name = "Sınıf")]
         [Required(ErrorMessage = "Sınıf alanı boş geçilemez")]
+
+        
         public string Class { get; set; }
 
         public List<AppUser> UnaprrovedUsers { get; set; }

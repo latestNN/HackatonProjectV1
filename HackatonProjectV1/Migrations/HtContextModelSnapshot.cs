@@ -148,7 +148,7 @@ namespace HackatonProjectV1.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("contentId")
+                    b.Property<int?>("contentId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -163,7 +163,10 @@ namespace HackatonProjectV1.Migrations
             modelBuilder.Entity("HackatonProjectV1.Entities.MainPageElements.Content", b =>
                 {
                     b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime?>("CreateTime")
                         .HasColumnType("datetime2");
@@ -186,7 +189,7 @@ namespace HackatonProjectV1.Migrations
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UniversityId")
+                    b.Property<int?>("UniversityId")
                         .HasColumnType("int");
 
                     b.Property<string>("UserId")
@@ -202,6 +205,8 @@ namespace HackatonProjectV1.Migrations
                     b.HasIndex("UniversityId");
 
                     b.HasIndex("UserId");
+
+                    b.HasIndex("departmentId");
 
                     b.ToTable("contents");
                 });
@@ -439,9 +444,7 @@ namespace HackatonProjectV1.Migrations
 
                     b.HasOne("HackatonProjectV1.Entities.MainPageElements.Content", "content")
                         .WithMany("comments")
-                        .HasForeignKey("contentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("contentId");
 
                     b.Navigation("User");
 
@@ -455,21 +458,19 @@ namespace HackatonProjectV1.Migrations
                         .HasForeignKey("FacultyId")
                         .OnDelete(DeleteBehavior.SetNull);
 
-                    b.HasOne("HackatonProjectV1.Entities.MainPageElements.Department", "department")
-                        .WithMany("contents")
-                        .HasForeignKey("Id")
-                        .OnDelete(DeleteBehavior.SetNull)
-                        .IsRequired();
-
                     b.HasOne("HackatonProjectV1.Entities.MainPageElements.University", "university")
                         .WithMany("contents")
                         .HasForeignKey("UniversityId")
-                        .OnDelete(DeleteBehavior.SetNull)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("HackatonProjectV1.Entities.AppUser", "User")
                         .WithMany("contents")
                         .HasForeignKey("UserId");
+
+                    b.HasOne("HackatonProjectV1.Entities.MainPageElements.Department", "department")
+                        .WithMany("contents")
+                        .HasForeignKey("departmentId")
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("User");
 
@@ -491,7 +492,7 @@ namespace HackatonProjectV1.Migrations
                     b.HasOne("HackatonProjectV1.Entities.MainPageElements.University", "University")
                         .WithMany("departments")
                         .HasForeignKey("UniversityId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Faculty");

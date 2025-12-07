@@ -1,0 +1,316 @@
+﻿@model List<HackatonProjectV1.Entities.MainPageElements.Content>
+<main class="feed">
+
+    <div class="tabs-container">
+
+        <div class="filter-tabs">
+
+            <button class="tab active" id="btn-university" data-target="content-universite">Üniversite</button>
+
+            <div class="dropdown-container">
+                <button class="tab dropdown-btn">
+                    Fakülte <i class="fa-solid fa-chevron-down"></i>
+                </button>
+                <div class="dropdown-menu">
+                    <div class="dropdown-item" data-target="content-fakulte-muhendislik" data-filter="muhendislik">Mühendislik Fak.</div>
+                    <div class="dropdown-item" data-target="content-fakulte-tip" data-filter="tip">Tıp Fakültesi</div>
+                    <div class="dropdown-item" data-target="content-fakulte-hukuk" data-filter="hukuk">Hukuk Fakültesi</div>
+                    <div class="dropdown-item" data-target="content-bolum-mimarlik" data-filter="mimarlik">Mimarlık Fakültesi</div>
+                </div>
+            </div>
+
+            <div class="dropdown-container">
+                <button class="tab dropdown-btn" id="btn-department">
+                    Bölüm <i class="fa-solid fa-chevron-down"></i>
+                </button>
+                <div class="dropdown-menu" id="department-menu">
+                    <div class="dropdown-item" data-target="content-bolum-yazilim" data-category="muhendislik">Yazılım Müh.</div>
+                    <div class="dropdown-item" data-target="content-bolum-yazilim" data-category="muhendislik">Bilgisayar Müh.</div>
+                    <div class="dropdown-item" data-target="content-bolum-mimarlik" data-category="mimarlik">Mimarlık</div>
+                    <div class="dropdown-item" data-target="content-fakulte-tip" data-category="tip">Tıp (Genel)</div>
+                    <div class="dropdown-item" data-target="content-fakulte-hukuk" data-category="hukuk">Hukuk (Genel)</div>
+                    <div class="dropdown-item" data-target="content-bolum-psikoloji" data-category="fenedebiyat">Psikoloji</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="content-universite" class="content-section active">
+        @foreach (var item in Model)
+        {
+            <article class="card post-card">
+                <div class="post-header">
+                    <div class="user-info">
+                        <div class="avatar av-green">AV</div>
+                        <div class="meta"><span class="username">@item.User.UserName</span><span class="time">@item.CreateTime</span></div>
+                    </div>
+                    <span class="badge badge-blue">@item.Label.ToString()</span>
+                </div>
+                <h2 class="post-title">@item.Title</h2>
+                <p class="post-content">
+                    @item.Description
+                </p>
+                <div class="post-actions">
+                    <button class="action-btn btn-like"><i class="fa-regular fa-thumbs-up"></i> @item.Like</button>
+                    <button class="action-btn btn-dislike"><i class="fa-regular fa-thumbs-down"></i> @item.Dislike</button>
+                    <button class="action-btn btn-comment"><i class="fa-regular fa-comment"></i> 12</button>
+                </div>
+            </article>
+        }
+        
+
+        <article class="card post-card">
+            <div class="post-header">
+                <div class="user-info">
+                    <div class="avatar av-orange">AY</div>
+                    <div class="meta"><span class="username">Ayşe Yılmaz</span><span class="time">5 saat önce</span></div>
+                </div>
+                <span class="badge badge-green">ETKİNLİK</span>
+            </div>
+            <h2 class="post-title">Kampüs Kahve Festivali ☕</h2>
+            <p class="post-content">
+                Yarın öğleden sonra kütüphane önünde ücretsiz kahve tadımı var.
+                Herkesi bekliyoruz, fincanını kap gel!
+            </p>
+            <div class="post-actions">
+                <button class="action-btn btn-like"><i class="fa-regular fa-thumbs-up"></i> 128</button>
+                <button class="action-btn btn-dislike"><i class="fa-regular fa-thumbs-down"></i> 12</button>
+                <button class="action-btn btn-comment"><i class="fa-regular fa-comment"></i> 45</button>
+            </div>
+        </article>
+
+        <article class="card post-card">
+            <div class="post-header">
+                <div class="user-info">
+                    <div class="avatar av-purple">YK</div>
+                    <div class="meta"><span class="username">Yazılım Kulübü</span><span class="time">Dün</span></div>
+                </div>
+                <span class="badge badge-blue">KAYNAK</span>
+            </div>
+            <h2 class="post-title">GitHub Student Developer Pack (Ücretsiz Lisanslar)</h2>
+            <p class="post-content">
+                Arkadaşlar öğrenci e-postanız ile başvurarak JetBrains (IntelliJ, PyCharm), Canva Pro, Namecheap domain ve Azure kredisi gibi yüzlerce dolarlık araca ücretsiz sahip olabilirsiniz.
+                Kaçırmayın!
+            </p>
+            <div class="post-actions">
+                <button class="action-btn btn-like"><i class="fa-regular fa-thumbs-up"></i> 512</button>
+                <button class="action-btn btn-dislike"><i class="fa-regular fa-thumbs-down"></i> 0</button>
+                <button class="action-btn btn-comment"><i class="fa-regular fa-comment"></i> 89</button>
+            </div>
+        </article>
+    </div>
+
+    <div id="content-fakulte-muhendislik" class="content-section">
+        <article class="card post-card">
+            <div class="post-header">
+                <div class="user-info">
+                    <div class="avatar av-blue">MK</div>
+                    <div class="meta"><span class="username">Mühendislik Dekanlığı</span><span class="time">10 dk önce</span></div>
+                </div>
+                <span class="badge badge-red">DUYURU</span>
+            </div>
+            <h2 class="post-title">Laboratuvar Kullanım Saatleri Güncellendi</h2>
+            <p class="post-content">
+                Mühendislik Fakültesi bilgisayar laboratuvarları sınav haftası boyunca
+                24 saat açık olacaktır. Girişler kartlı sistemle yapılacaktır.
+            </p>
+            <div class="post-actions">
+                <button class="action-btn btn-like"><i class="fa-regular fa-thumbs-up"></i> 210</button>
+                <button class="action-btn btn-dislike"><i class="fa-regular fa-thumbs-down"></i> 5</button>
+                <button class="action-btn btn-comment"><i class="fa-regular fa-comment"></i> 45</button>
+            </div>
+        </article>
+
+        <article class="card post-card">
+            <div class="post-header">
+                <div class="user-info">
+                    <div class="avatar av-blue">MK</div>
+                    <div class="meta"><span class="username">Mühendislik Dekanlığı</span><span class="time">1 gün önce</span></div>
+                </div>
+                <span class="badge badge-red">SINAV</span>
+            </div>
+            <h2 class="post-title">Ortak Dersler Sınav Takvimi</h2>
+            <p class="post-content">
+                Matematik 1 ve Fizik 1 sınav yerleri OBS üzerinden açıklanmıştır.
+                Lütfen sınav salonunuzu kontrol ediniz.
+            </p>
+            <div class="post-actions">
+                <button class="action-btn btn-like"><i class="fa-regular fa-thumbs-up"></i> 85</button>
+                <button class="action-btn btn-dislike"><i class="fa-regular fa-thumbs-down"></i> 2</button>
+                <button class="action-btn btn-comment"><i class="fa-regular fa-comment"></i> 12</button>
+            </div>
+        </article>
+    </div>
+
+    <div id="content-bolum-yazilim" class="content-section">
+        <article class="card post-card">
+            <div class="post-header">
+                <div class="user-info">
+                    <div class="avatar av-purple">ZK</div>
+                    <div class="meta"><span class="username">Zeynep Kaya</span><span class="time">1 saat önce</span></div>
+                </div>
+                <span class="badge badge-blue">SORU - CEVAP</span>
+            </div>
+            <h2 class="post-title">Yazılım Müh. 2. Sınıf Seçmeli Dersler?</h2>
+            <p class="post-content">
+                Arkadaşlar önümüzdeki dönem için 'Yapay Zeka' mı yoksa 'Veri Madenciliği' mi
+                daha mantıklı olur? Hoca durumları nasıl, hangisi daha öğretici?
+            </p>
+            <div class="post-actions">
+                <button class="action-btn btn-like"><i class="fa-regular fa-thumbs-up"></i> 15</button>
+                <button class="action-btn btn-dislike"><i class="fa-regular fa-thumbs-down"></i> 1</button>
+                <button class="action-btn btn-comment"><i class="fa-regular fa-comment"></i> 8</button>
+            </div>
+        </article>
+    </div>
+
+    <div id="content-fakulte-tip" class="content-section">
+        <article class="card post-card">
+            <div class="post-header">
+                <div class="user-info">
+                    <div class="avatar av-green">TF</div>
+                    <div class="meta"><span class="username">Tıp Fakültesi Dekanlığı</span><span class="time">3 saat önce</span></div>
+                </div>
+                <span class="badge badge-red">DUYURU</span>
+            </div>
+            <h2 class="post-title">Anatomi Laboratuvarı Kuralları</h2>
+            <p class="post-content">
+                Laboratuvar derslerine önlüksüz girmek kesinlikle yasaktır.
+                Kadavra incelemelerinde fotoğraf çekimi yapılamaz, tespit edilenler hakkında işlem yapılacaktır.
+            </p>
+            <div class="post-actions">
+                <button class="action-btn btn-like"><i class="fa-regular fa-thumbs-up"></i> 342</button>
+                <button class="action-btn btn-dislike"><i class="fa-regular fa-thumbs-down"></i> 10</button>
+                <button class="action-btn btn-comment"><i class="fa-regular fa-comment"></i> 15</button>
+            </div>
+        </article>
+
+        <article class="card post-card">
+            <div class="post-header">
+                <div class="user-info">
+                    <div class="avatar av-purple">MD</div>
+                    <div class="meta"><span class="username">Mehmet Demir</span><span class="time">Dün</span></div>
+                </div>
+                <span class="badge badge-blue">DERS NOTLARI</span>
+            </div>
+            <h2 class="post-title">Histoloji Komite Çıkmış Sorular</h2>
+            <p class="post-content">
+                Geçen senenin 2. komite çıkmış sorularını derledim. Drive linkini profilimde paylaştım,
+                isteyen oradan ulaşabilir.
+            </p>
+            <div class="post-actions">
+                <button class="action-btn btn-like"><i class="fa-regular fa-thumbs-up"></i> 89</button>
+                <button class="action-btn btn-dislike"><i class="fa-regular fa-thumbs-down"></i> 2</button>
+                <button class="action-btn btn-comment"><i class="fa-regular fa-comment"></i> 24</button>
+            </div>
+        </article>
+    </div>
+
+    <div id="content-fakulte-hukuk" class="content-section">
+        <article class="card post-card">
+            <div class="post-header">
+                <div class="user-info">
+                    <div class="avatar av-orange">AS</div>
+                    <div class="meta"><span class="username">Ahmet Solmaz</span><span class="time">5 saat önce</span></div>
+                </div>
+                <span class="badge badge-blue">SORU - CEVAP</span>
+            </div>
+            <h2 class="post-title">Anayasa Hukuku Pratik Çalışma</h2>
+            <p class="post-content">
+                Yarınki pratik çalışma için "Normlar Hiyerarşisi" konusuna nerden çalışıyorsunuz?
+                Hoca kitaptan sorumlu muyuz dedi, yoksa sadece notlar yeterli mi?
+            </p>
+            <div class="post-actions">
+                <button class="action-btn btn-like"><i class="fa-regular fa-thumbs-up"></i> 23</button>
+                <button class="action-btn btn-dislike"><i class="fa-regular fa-thumbs-down"></i> 4</button>
+                <button class="action-btn btn-comment"><i class="fa-regular fa-comment"></i> 45</button>
+            </div>
+        </article>
+
+        <article class="card post-card">
+            <div class="post-header">
+                <div class="user-info">
+                    <div class="avatar av-blue">HK</div>
+                    <div class="meta"><span class="username">Hukuk Kulübü</span><span class="time">2 gün önce</span></div>
+                </div>
+                <span class="badge badge-green">ETKİNLİK</span>
+            </div>
+            <h2 class="post-title">Farazi Dava Yarışması Başvuruları ⚖️</h2>
+            <p class="post-content">
+                Bu seneki kurgusal duruşma yarışması için takım başvuruları başladı!
+                Detaylar panoda asılı, katılmak isteyenler kulüp odasına uğrayabilir.
+            </p>
+            <div class="post-actions">
+                <button class="action-btn btn-like"><i class="fa-regular fa-thumbs-up"></i> 156</button>
+                <button class="action-btn btn-dislike"><i class="fa-regular fa-thumbs-down"></i> 8</button>
+                <button class="action-btn btn-comment"><i class="fa-regular fa-comment"></i> 12</button>
+            </div>
+        </article>
+    </div>
+
+    <div id="content-bolum-mimarlik" class="content-section">
+        <article class="card post-card">
+            <div class="post-header">
+                <div class="user-info">
+                    <div class="avatar av-purple">EC</div>
+                    <div class="meta"><span class="username">Elif Can</span><span class="time">40 dk önce</span></div>
+                </div>
+                <span class="badge badge-red">ÖDEV</span>
+            </div>
+            <h2 class="post-title">Jüri İçin Maket Malzemesi Lazım!</h2>
+            <p class="post-content">
+                Arkadaşlar yarınki jüri için 3mm mukavva ve balsa ağacı lazım.
+                Elinde fazla olan var mı? Ücretiyle alırım, çok acil!
+            </p>
+            <div class="post-actions">
+                <button class="action-btn btn-like"><i class="fa-regular fa-thumbs-up"></i> 12</button>
+                <button class="action-btn btn-dislike"><i class="fa-regular fa-thumbs-down"></i> 0</button>
+                <button class="action-btn btn-comment"><i class="fa-regular fa-comment"></i> 6</button>
+            </div>
+        </article>
+
+        <article class="card post-card">
+            <div class="post-header">
+                <div class="user-info">
+                    <div class="avatar av-green">MA</div>
+                    <div class="meta"><span class="username">Mimarlık Atölyesi</span><span class="time">6 saat önce</span></div>
+                </div>
+                <span class="badge badge-blue">KAYNAK</span>
+            </div>
+            <h2 class="post-title">Render İçin Texture Arşivi</h2>
+            <p class="post-content">
+                Projelerinizde kullanabileceğiniz ücretsiz 4K texture arşivini paylaşıyorum.
+                İndirme linki yorumlarda.
+            </p>
+            <div class="post-actions">
+                <button class="action-btn btn-like"><i class="fa-regular fa-thumbs-up"></i> 204</button>
+                <button class="action-btn btn-dislike"><i class="fa-regular fa-thumbs-down"></i> 3</button>
+                <button class="action-btn btn-comment"><i class="fa-regular fa-comment"></i> 25</button>
+            </div>
+        </article>
+    </div>
+
+    <div id="content-bolum-psikoloji" class="content-section">
+        <article class="card post-card">
+            <div class="post-header">
+                <div class="user-info">
+                    <div class="avatar av-orange">BK</div>
+                    <div class="meta"><span class="username">Burak Kaya</span><span class="time">2 saat önce</span></div>
+                </div>
+                <span class="badge badge-green">PROJE</span>
+            </div>
+            <h2 class="post-title">Bitirme Tezi İçin Katılımcı Aranıyor</h2>
+            <p class="post-content">
+                "Sosyal Medya ve Özgüven" konulu tez çalışmam için aşağıdaki anketi doldurarak bana destek olabilirsiniz.
+                Sadece 5 dakikanızı alacak. Link profilimde.
+            </p>
+            <div class="post-actions">
+                <button class="action-btn btn-like"><i class="fa-regular fa-thumbs-up"></i> 45</button>
+                <button class="action-btn btn-dislike"><i class="fa-regular fa-thumbs-down"></i> 2</button>
+                <button class="action-btn btn-comment"><i class="fa-regular fa-comment"></i> 8</button>
+            </div>
+        </article>
+    </div>
+
+</main>

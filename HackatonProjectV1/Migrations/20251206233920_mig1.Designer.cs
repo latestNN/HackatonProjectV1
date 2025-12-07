@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HackatonProjectV1.Migrations
 {
     [DbContext(typeof(HtContext))]
-    [Migration("20251206204453_mig1")]
+    [Migration("20251206233920_mig1")]
     partial class mig1
     {
         /// <inheritdoc />
@@ -100,9 +100,18 @@ namespace HackatonProjectV1.Migrations
                     b.Property<string>("University")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("UniversityId")
+                        .HasColumnType("int");
+
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
+
+                    b.Property<int?>("departmentId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("facultyId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -114,7 +123,164 @@ namespace HackatonProjectV1.Migrations
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
+                    b.HasIndex("UniversityId");
+
+                    b.HasIndex("departmentId");
+
+                    b.HasIndex("facultyId");
+
                     b.ToTable("AspNetUsers", (string)null);
+                });
+
+            modelBuilder.Entity("HackatonProjectV1.Entities.MainPageElements.Comments", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("CreateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int?>("contentId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.HasIndex("contentId");
+
+                    b.ToTable("comments");
+                });
+
+            modelBuilder.Entity("HackatonProjectV1.Entities.MainPageElements.Content", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime?>("CreateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("Dislike")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("FacultyId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Label")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Like")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("UniversityId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int?>("departmentId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FacultyId");
+
+                    b.HasIndex("UniversityId");
+
+                    b.HasIndex("UserId");
+
+                    b.HasIndex("departmentId");
+
+                    b.ToTable("contents");
+                });
+
+            modelBuilder.Entity("HackatonProjectV1.Entities.MainPageElements.Department", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("FacultyId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UniversityId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FacultyId");
+
+                    b.HasIndex("UniversityId");
+
+                    b.ToTable("departments");
+                });
+
+            modelBuilder.Entity("HackatonProjectV1.Entities.MainPageElements.Faculty", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UniversityId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UniversityId");
+
+                    b.ToTable("faculties");
+                });
+
+            modelBuilder.Entity("HackatonProjectV1.Entities.MainPageElements.University", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("universities");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -250,6 +416,104 @@ namespace HackatonProjectV1.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("HackatonProjectV1.Entities.AppUser", b =>
+                {
+                    b.HasOne("HackatonProjectV1.Entities.MainPageElements.University", "university")
+                        .WithMany("appUsers")
+                        .HasForeignKey("UniversityId");
+
+                    b.HasOne("HackatonProjectV1.Entities.MainPageElements.Department", "department")
+                        .WithMany("appUsers")
+                        .HasForeignKey("departmentId");
+
+                    b.HasOne("HackatonProjectV1.Entities.MainPageElements.Faculty", "faculty")
+                        .WithMany("appUsers")
+                        .HasForeignKey("facultyId");
+
+                    b.Navigation("department");
+
+                    b.Navigation("faculty");
+
+                    b.Navigation("university");
+                });
+
+            modelBuilder.Entity("HackatonProjectV1.Entities.MainPageElements.Comments", b =>
+                {
+                    b.HasOne("HackatonProjectV1.Entities.AppUser", "User")
+                        .WithMany("comments")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HackatonProjectV1.Entities.MainPageElements.Content", "content")
+                        .WithMany("comments")
+                        .HasForeignKey("contentId");
+
+                    b.Navigation("User");
+
+                    b.Navigation("content");
+                });
+
+            modelBuilder.Entity("HackatonProjectV1.Entities.MainPageElements.Content", b =>
+                {
+                    b.HasOne("HackatonProjectV1.Entities.MainPageElements.Faculty", "faculty")
+                        .WithMany("contents")
+                        .HasForeignKey("FacultyId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.HasOne("HackatonProjectV1.Entities.MainPageElements.University", "university")
+                        .WithMany("contents")
+                        .HasForeignKey("UniversityId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.HasOne("HackatonProjectV1.Entities.AppUser", "User")
+                        .WithMany("contents")
+                        .HasForeignKey("UserId");
+
+                    b.HasOne("HackatonProjectV1.Entities.MainPageElements.Department", "department")
+                        .WithMany("contents")
+                        .HasForeignKey("departmentId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.Navigation("User");
+
+                    b.Navigation("department");
+
+                    b.Navigation("faculty");
+
+                    b.Navigation("university");
+                });
+
+            modelBuilder.Entity("HackatonProjectV1.Entities.MainPageElements.Department", b =>
+                {
+                    b.HasOne("HackatonProjectV1.Entities.MainPageElements.Faculty", "Faculty")
+                        .WithMany("departments")
+                        .HasForeignKey("FacultyId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("HackatonProjectV1.Entities.MainPageElements.University", "University")
+                        .WithMany("departments")
+                        .HasForeignKey("UniversityId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Faculty");
+
+                    b.Navigation("University");
+                });
+
+            modelBuilder.Entity("HackatonProjectV1.Entities.MainPageElements.Faculty", b =>
+                {
+                    b.HasOne("HackatonProjectV1.Entities.MainPageElements.University", "University")
+                        .WithMany("faculties")
+                        .HasForeignKey("UniversityId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("University");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -299,6 +563,45 @@ namespace HackatonProjectV1.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("HackatonProjectV1.Entities.AppUser", b =>
+                {
+                    b.Navigation("comments");
+
+                    b.Navigation("contents");
+                });
+
+            modelBuilder.Entity("HackatonProjectV1.Entities.MainPageElements.Content", b =>
+                {
+                    b.Navigation("comments");
+                });
+
+            modelBuilder.Entity("HackatonProjectV1.Entities.MainPageElements.Department", b =>
+                {
+                    b.Navigation("appUsers");
+
+                    b.Navigation("contents");
+                });
+
+            modelBuilder.Entity("HackatonProjectV1.Entities.MainPageElements.Faculty", b =>
+                {
+                    b.Navigation("appUsers");
+
+                    b.Navigation("contents");
+
+                    b.Navigation("departments");
+                });
+
+            modelBuilder.Entity("HackatonProjectV1.Entities.MainPageElements.University", b =>
+                {
+                    b.Navigation("appUsers");
+
+                    b.Navigation("contents");
+
+                    b.Navigation("departments");
+
+                    b.Navigation("faculties");
                 });
 #pragma warning restore 612, 618
         }

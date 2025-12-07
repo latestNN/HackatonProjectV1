@@ -6,9 +6,9 @@
 
         public string Content { get; set; }
 
-        public int contentId { get; set; }
+        public int? contentId { get; set; }
 
-        public Content content { get; set; }
+        public Content? content { get; set; }
 
         public string UserId { get; set; }
 

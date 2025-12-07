@@ -1,0 +1,72 @@
+﻿@model HackatonProjectV1.ViewModel.LabelSelectionViewModel
+@{
+    var labels = ViewBag.Labels as List<HackatonProjectV1.Entities.MainPageElements.ContentLabel>;
+}
+<div class="card tags-card">
+    <h3>Etiketler</h3>
+    <form asp-controller="Main" asp-action="UseFilter" method="post" id="filterForm">
+        <div class="tags-wrapper">
+            @foreach (var label in labels)
+            {
+                if (label == HackatonProjectV1.Entities.MainPageElements.ContentLabel.Homework)
+                {
+                    <input type="checkbox" id="tag-odev" name="SelectedLabels" value="@label" />
+
+                    <label for="tag-odev" class="tag-chip">Ödev</label>
+                }
+                else if (label == HackatonProjectV1.Entities.MainPageElements.ContentLabel.Exam)
+                {
+                    <input type="checkbox" id="tag-sinav" name="SelectedLabels" value="@label" />
+
+                    <label for="tag-sinav" class="tag-chip">Sınav</label>
+                }
+                else if (label == HackatonProjectV1.Entities.MainPageElements.ContentLabel.Question)
+                {
+                    <input type="checkbox" id="tag-soru" name="SelectedLabels" value="@label" />
+
+                    <label for="tag-soru" class="tag-chip">Soru</label>
+                }
+                else if (label == HackatonProjectV1.Entities.MainPageElements.ContentLabel.Source)
+                {
+                    <input type="checkbox" id="tag-notlar" name="SelectedLabels" value="@label" />
+
+                    <label for="tag-notlar" class="tag-chip">Ders Notları</label>
+                }
+                else if (label == HackatonProjectV1.Entities.MainPageElements.ContentLabel.Announcemen)
+                {
+                    <input type="checkbox" id="tag-duyuru" name="SelectedLabels" value="@label" />
+
+                    <label for="tag-duyuru" class="tag-chip">Duyurular</label>
+                }
+                else if (label == HackatonProjectV1.Entities.MainPageElements.ContentLabel.Event)
+                {
+                    <input type="checkbox" id="tag-etkinlik" name="SelectedLabels" value="@label" />
+
+                    <label for="tag-etkinlik" class="tag-chip">Etkinlik</label>
+                }
+                else if (label == HackatonProjectV1.Entities.MainPageElements.ContentLabel.Project)
+                {
+                    <input type="checkbox" id="tag-proje" name="SelectedLabels" value="@label" />
+
+                    <label for="tag-proje" class="tag-chip">Etkinlik</label>
+                }
+                else if (label == HackatonProjectV1.Entities.MainPageElements.ContentLabel.Source)
+                {
+                    <input type="checkbox" id="tag-kaynak" name="SelectedLabels" value="@label" />
+
+                    <label for="tag-kaynak" class="tag-chip">Kaynak</label>
+                }
+                
+            }
+            
+            @* <input type="checkbox" id="tag-etkinlik" name="tags" value="etkinlik"><label for="tag-etkinlik" class="tag-chip">Etkinlik</label>
+            <input type="checkbox" id="tag-soru" name="tags" value="soru-cevap"><label for="tag-soru" class="tag-chip">Soru - Cevap</label>
+            <input type="checkbox" id="tag-proje" name="tags" value="proje"><label for="tag-proje" class="tag-chip">Proje</label>
+            <input type="checkbox" id="tag-notlar" name="tags" value="ders-notlari"><label for="tag-notlar" class="tag-chip">Ders Notları</label>
+            <input type="checkbox" id="tag-kaynak" name="tags" value="kaynak"><label for="tag-kaynak" class="tag-chip">Kaynak</label>
+            <input type="checkbox" id="tag-duyuru" name="tags" value="duyuru"><label for="tag-duyuru" class="tag-chip">Duyuru</label>
+            <input type="checkbox" id="tag-sinav" name="tags" value="sinav"><label for="tag-sinav" class="tag-chip">Sınav</label> *@
+        </div>
+        <button type="submit" class="filter-btn">Filtrele</button>
+    </form>
+</div>

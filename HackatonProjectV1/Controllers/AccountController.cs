@@ -58,7 +58,7 @@ namespace HackatonProjectV1.Controllers
                     // Başarılıysa kullanıcıyı içeri al (Login yap) ve Anasayfaya gönder
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     //TempData["barcode"] = model.StudentBarcode;                    
-                    return RedirectToAction("Verify");
+                    return RedirectToAction("Index", "Home");
                 }
 
                 // Hata varsa (örn: Bu email zaten kayıtlı), hataları modele ekle
@@ -72,10 +72,10 @@ namespace HackatonProjectV1.Controllers
             return View(model);
         }
 
-        public IActionResult Verify()
-        {
-            return View();
-        }
+        //public IActionResult Verify()
+        //{
+        //    return RedirectToAction("Index", "Home");
+        //}
 
         [HttpGet]
         public IActionResult Login()
@@ -88,16 +88,11 @@ namespace HackatonProjectV1.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Önce kullanıcı var mı diye e-mail ile kontrol edelim (Opsiyonel ama iyi pratiktir)
+                
                 var user = await _userManager.FindByEmailAsync(model.Email);
 
                 if (user != null)
                 {
-                    // PasswordSignInAsync parametreleri:
-                    // 1. Kullanıcı Adı (Biz email kullanıyoruz ama Identity username bekler, o yüzden user.UserName veriyoruz)
-                    // 2. Şifre
-                    // 3. Beni Hatırla (True ise cookie süresi uzar)
-                    // 4. Lockout (Yanlış girişte hesabı kilitleyelim mi? Şimdilik false)
 
                     var result = await _signInManager.PasswordSignInAsync(user.UserName, model.Password, model.RememberMe, false);
 
@@ -116,18 +111,6 @@ namespace HackatonProjectV1.Controllers
             
         }
 
-        //public async Task<IActionResult> Dogrula()
-        //{
-        //    if (TempData["barcode"] == null)
-        //        return RedirectToAction("Index");
-        //    var barcode = TempData["barcode"].ToString();            
-        //    var sonuc = await _eDevletService.DogrulaAsyn(barcode);
-        //    var model = JsonSerializer.Deserialize<BelgeSonuc>(sonuc);
-        //    var user = await _userManager.GetUserAsync(User);
-        //    user.IsApproved = model.durum;
-
-        //   return RedirectToAction("Index", "Home");
-        //}
 
     }
 }   

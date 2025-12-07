@@ -32,9 +32,9 @@
 
         public ICollection<Comments> comments { get; set; }
 
-        public int UniversityId { get; set; }
+        public int? UniversityId { get; set; }
 
-        public University university { get; set; }
+        public University? university { get; set; }
 
         public int? FacultyId { get; set; }
 
