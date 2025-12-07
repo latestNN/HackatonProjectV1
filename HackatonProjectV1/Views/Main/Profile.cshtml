@@ -1,0 +1,99 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profilim - UniForum</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="~/css/MainPage/profile.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fa-solid fa-graduation-cap"></i> UniForum
+            </div>
+            <ul class="nav-links">
+                <li><a href="/Main/Index">Ana Sayfa</a></li>
+                <li><a href="/Main/UnivercityList">Üniversiteler</a></li>
+                <li><a href="events.html">Etkinlikler</a></li>
+            </ul>
+            <div class="user-profile active">
+                <div class="avatar-circle">KY</div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <div class="profile-card">
+
+            <div class="profile-header">
+                <h2>Profilim</h2>
+                <p>Kişisel bilgilerini buradan görüntüleyebilirsin.</p>
+            </div>
+
+            <div class="user-summary">
+                <div class="avatar-large">KY</div>
+                <div class="user-identity">
+                    <h3>@ViewBag.FullName</h3>
+                    <span class="handle"></span>
+                </div>
+            </div>
+
+            <div class="info-list">
+                <div class="info-item">
+                    <label>E-posta</label>
+                    <span class="info-value">@ViewBag.Email</span>
+                </div>
+                <div class="info-item">
+                    <label>Üniversite</label>
+                    <span class="info-value">@ViewBag.University</span>
+                </div>
+                <div class="info-item">
+                    <label>Fakülte</label>
+                    <span class="info-value">@ViewBag.Faculty</span>
+                </div>
+                <div class="info-item">
+                    <label>Bölüm</label>
+                    <span class="info-value">@ViewBag.Department</span>
+                </div>
+                <div class="info-item">
+                    <label>Hesap Durumu</label>
+                    @if (ViewBag.AccountStatus == true)
+                    {
+                        <span class="info-value status-active">
+                            <i class="fa-solid fa-circle-check"></i> Aktif Öğrenci
+                        </span>
+                    }
+                    else
+                    {
+                        <span color="White" class="info-value status-active">
+                             Onay Bekleniyor...
+                        </span>
+                    }
+
+                </div>
+            </div>
+
+            <div class="action-area">
+                <a href="my-posts.html" class="btn-blue">
+                    <i class="fa-solid fa-layer-group"></i> Paylaşımlarım
+                </a>
+
+                <a href="edit-profil.html" class="btn-blue">
+                    <i class="fa-solid fa-pen-to-square"></i> Profili Düzenle
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="~/js/MainPage/profile.js"></script>
+</body>
+</html>

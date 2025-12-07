@@ -58,7 +58,7 @@ namespace HackatonProjectV1.Controllers
                     // Başarılıysa kullanıcıyı içeri al (Login yap) ve Anasayfaya gönder
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     //TempData["barcode"] = model.StudentBarcode;                    
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Main");
                 }
 
                 // Hata varsa (örn: Bu email zaten kayıtlı), hataları modele ekle
@@ -99,7 +99,7 @@ namespace HackatonProjectV1.Controllers
                     if (result.Succeeded)
                     {
                         // Başarılıysa Anasayfaya gönder
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction("Index", "Main");
                     }
                 }
 

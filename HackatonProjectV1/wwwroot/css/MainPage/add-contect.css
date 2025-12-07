@@ -1,0 +1,234 @@
+/* --- TEMEL DEĞİŞKENLER --- */
+:root {
+    --bg-dark: #0f1115;
+    --card-bg: #161920;
+    --border-color: #2a2e35;
+    --primary-blue: #2563eb;
+    --text-main: #e2e8f0;
+    --text-muted: #94a3b8;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+body { background-color: var(--bg-dark); color: var(--text-main); }
+
+/* --- NAVBAR (DÜZENLENDİ - TAM ORTALAMA) --- */
+.navbar {
+    background-color: var(--card-bg);
+    border-bottom: 1px solid var(--border-color);
+    padding: 0.8rem 0;
+    position: sticky; top: 0; z-index: 1000;
+}
+
+.nav-container {
+    max-width: 1200px; 
+    margin: 0 auto; 
+    padding: 0 20px;
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+    position: relative; /* Ortalamanın referans noktası burası */
+}
+
+.logo { 
+    font-weight: bold; 
+    font-size: 1.2rem; 
+    color: var(--primary-blue); 
+    display: flex; 
+    gap: 10px;
+    z-index: 2; /* Linklerin üstünde kalsın */
+}
+
+/* Linkleri Tam Ortalamak için Absolute Positioning */
+.nav-links {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%); /* Tam ortaya çeker */
+    display: flex;
+    align-items: center;
+    list-style: none;
+    gap: 20px;
+}
+
+.nav-links a { 
+    color: var(--text-muted); 
+    text-decoration: none; 
+    transition: 0.3s; 
+    font-weight: 500;
+}
+
+.nav-links a:hover { color: var(--primary-blue); }
+
+.user-profile { 
+    text-decoration: none; 
+    cursor: pointer;
+    z-index: 2; /* Linklerin üstünde kalsın */
+}
+
+.avatar-circle {
+    width: 36px; height: 36px; background-color: var(--primary-blue);
+    color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;
+    transition: opacity 0.3s;
+}
+.user-profile:hover .avatar-circle { opacity: 0.9; }
+
+/* --- FORM KARTI --- */
+.main-container {
+    max-width: 800px; 
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.form-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 30px;
+}
+
+.form-header { text-align: center; margin-bottom: 30px; }
+.form-header h2 { font-size: 1.8rem; margin-bottom: 10px; }
+.form-header p { color: var(--text-muted); font-size: 0.95rem; }
+
+/* --- INPUT GRUPLARI --- */
+.form-group { margin-bottom: 20px; }
+.form-row { display: flex; gap: 20px; }
+.form-row .form-group { flex: 1; }
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+input[type="text"], 
+select, 
+textarea {
+    width: 100%;
+    padding: 12px;
+    background-color: #0f1115;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    color: var(--text-main);
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: var(--primary-blue);
+}
+
+/* --- BUTONLAR --- */
+.button-group {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.btn {
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    border: none;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.3s;
+}
+
+.btn-secondary {
+    background-color: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-muted);
+}
+.btn-secondary:hover { border-color: var(--text-main); color: var(--text-main); }
+
+.btn-primary {
+    background-color: var(--primary-blue);
+    color: white;
+}
+.btn-primary:hover { background-color: #1d4ed8; }
+
+/* Responsive */
+
+@media (max-width: 360px) {
+
+    
+
+}
+
+
+
+@media (max-width: 480px){
+
+
+
+}
+
+
+
+@media (max-width: 720px){
+
+
+
+}
+
+
+
+@media (max-width: 1024px){
+
+
+
+}
+
+
+
+@media (max-width: 1440px){
+
+
+
+}
+
+
+
+@media (max-width: 1920px){
+
+
+
+}
+
+
+
+@media (max-width: 2560px){
+
+
+
+}
+
+
+
+@media (max-width: 2560px){
+
+
+
+}
+
+
+
+@media (max-width: 3440px){
+
+
+
+}
+
+
+
+@media (max-width: 3840px){
+
+
+
+}

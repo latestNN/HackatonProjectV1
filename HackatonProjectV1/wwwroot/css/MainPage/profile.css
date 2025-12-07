@@ -1,0 +1,186 @@
+/* --- TEMEL DEĞİŞKENLER --- */
+:root {
+    --bg-dark: #0f1115;
+    --card-bg: #161920;
+    --border-color: #2a2e35;
+    --primary-blue: #2563eb;
+    --text-main: #e2e8f0;
+    --text-muted: #94a3b8;
+    --success-green: #10b981;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+body { background-color: var(--bg-dark); color: var(--text-main); }
+
+/* --- NAVBAR (GÜNCELLENDİ - TAM ORTALAMA) --- */
+.navbar { 
+    background-color: var(--card-bg); 
+    border-bottom: 1px solid var(--border-color); 
+    padding: 0.8rem 0; 
+    position: sticky; 
+    top: 0; 
+    z-index: 1000; 
+}
+
+.nav-container { 
+    max-width: 1200px; 
+    margin: 0 auto; 
+    padding: 0 20px; 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+    position: relative; /* Ortalamanın referans noktası */
+}
+
+.logo { 
+    font-weight: bold; 
+    font-size: 1.2rem; 
+    color: var(--primary-blue); 
+    display: flex; 
+    gap: 10px; 
+    z-index: 2; /* Linklerin üstünde kalsın */
+}
+
+/* Linkleri Tam Ortalamak için Absolute Positioning */
+.nav-links { 
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%); /* Tam ortaya çeker */
+    display: flex; 
+    list-style: none; 
+    gap: 20px; 
+}
+
+.nav-links a { 
+    color: var(--text-muted); 
+    text-decoration: none; 
+    transition: 0.3s; 
+}
+
+.nav-links a:hover { 
+    color: var(--primary-blue); 
+}
+
+.user-profile { 
+    text-decoration: none; 
+    cursor: default; 
+    z-index: 2; /* Linklerin üstünde kalsın */
+}
+
+.avatar-circle { 
+    width: 36px; 
+    height: 36px; 
+    background-color: var(--primary-blue); 
+    color: white; 
+    border-radius: 50%; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    font-weight: bold; 
+}
+
+/* --- PROFİL KARTI (ORTAK) --- */
+.main-container { 
+    max-width: 700px; 
+    margin: 40px auto; 
+    padding: 0 20px; 
+}
+
+.profile-card { 
+    background-color: var(--card-bg); 
+    border: 1px solid var(--border-color); 
+    border-radius: 16px; 
+    padding: 40px; 
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3); 
+}
+
+.profile-header { text-align: center; margin-bottom: 30px; }
+.profile-header h2 { font-size: 1.8rem; margin-bottom: 5px; }
+.profile-header p { color: var(--text-muted); font-size: 0.95rem; }
+
+/* --- KULLANICI ÖZETİ --- */
+.user-summary { 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    margin-bottom: 30px; 
+    padding-bottom: 30px; 
+    border-bottom: 1px solid var(--border-color); 
+}
+
+.avatar-large { 
+    width: 80px; height: 80px; 
+    background-color: var(--primary-blue); 
+    color: white; 
+    font-size: 2rem; 
+    font-weight: bold; 
+    border-radius: 50%; 
+    display: flex; align-items: center; justify-content: center; 
+    margin-bottom: 15px; 
+    box-shadow: 0 0 15px rgba(37, 99, 235, 0.3); 
+}
+
+.user-identity { text-align: center; }
+.user-identity h3 { font-size: 1.4rem; margin-bottom: 5px; }
+.user-identity .handle { color: var(--text-muted); font-size: 1rem; }
+
+/* --- BİLGİ LİSTESİ --- */
+.info-list { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 20px; 
+}
+
+.info-item { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 15px 0; 
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03); 
+}
+
+.info-item:last-child { border-bottom: none; }
+
+.info-item label { color: var(--text-muted); font-weight: 500; font-size: 0.95rem; }
+.info-value { color: var(--text-main); font-weight: 600; font-size: 1rem; text-align: right; }
+.status-active { color: var(--success-green); display: flex; align-items: center; gap: 8px; }
+
+/* --- BUTONLAR ALANI (GÜNCELLENDİ) --- */
+.action-area {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 15px; /* Butonlar arası boşluk */
+}
+
+/* ORTAK MAVİ BUTON STİLİ */
+.btn-blue {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background-color: var(--primary-blue);
+    color: white;
+    text-decoration: none;
+    padding: 12px 0; /* Genişliği flex ile ayarlayacağız */
+    width: 200px;    /* Eşit genişlik */
+    border-radius: 30px;
+    font-weight: 600;
+    transition: background 0.3s, transform 0.2s;
+    border: 1px solid transparent;
+}
+
+.btn-blue:hover {
+    background-color: #1d4ed8;
+    transform: translateY(-2px);
+}
+
+/* Mobil Uyumluluk */
+@media (max-width: 600px) {
+    .info-item { flex-direction: column; align-items: flex-start; gap: 5px; }
+    .info-value { text-align: left; }
+    .nav-links { display: none; }
+    
+    .action-area { flex-direction: column; }
+    .btn-blue { width: 100%; }
+}

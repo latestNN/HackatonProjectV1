@@ -1,0 +1,83 @@
+﻿@model HackatonProjectV1.ViewModel.CreateContent
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İçerik Ekle - UniForum</title>
+    <link rel="stylesheet" href="~/css/MainPage/add-contect.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fa-solid fa-graduation-cap"></i> UniForum
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Ana Sayfa</a></li>
+                <li><a href="universities.html">Üniversiteler</a></li>
+                <li><a href="events.html">Etkinlikler</a></li>
+            </ul>
+            <a href="profile.html" class="user-profile">
+                <div class="avatar-circle">KY</div>
+            </a>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <div class="form-card">
+            <div class="form-header">
+                <h2>Yeni İçerik Oluştur</h2>
+                <p>Sorunu sor, notlarını paylaş veya bir etkinlik duyur.</p>
+            </div>
+
+            @using (Html.BeginForm("Create", "Main", FormMethod.Post))
+            {
+                <div class="form-group">
+                    <label for="postTitle">Başlık</label>
+                    @Html.TextBoxFor(m => m.Title, new { @id = "postTitle" })
+                    
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="postCategory">Etiketler</label>
+                        @Html.DropDownListFor(m => m.Label, (List<SelectListItem>)ViewBag.Labels, "Seçiniz", new { @class = "form-control", @id="postCategory", required="required" })
+                    </div>
+
+                    <div class="form-group">
+                        <label for="relatedUnit">İlgili Birim</label>
+                        <select id="relatedUnit" name="contentLevel">
+                            <option value="genel">Genel (Tüm Üniversite)</option>
+                            <option value="fakulte">Fakültesi</option>
+                            <option value="yazilim">Bölüm</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="postContent">İçerik Detayı</label>
+                    @Html.TextAreaFor(m => m.Description, new { @id = "postContent" })
+                    
+                </div>
+
+                @Html.HiddenFor(m => m.UserId)
+
+                <div class="button-group">
+                    <a href="index.html" class="btn btn-secondary">İptal</a>
+                    <button type="submit" class="btn btn-primary">Paylaş</button>
+                </div>
+
+            }
+        </div>
+    </div>
+
+    <script src="~/js/MainPage/add-contect.js"></script>
+</body>
+</html>
