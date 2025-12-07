@@ -1,0 +1,520 @@
+/* --- TEMEL AYARLAR --- */
+:root {
+    --bg-dark: #0f1115;
+    --card-bg: #161920;
+    --border-color: #2a2e35;
+    --primary-blue: #2563eb;
+    --text-main: #e2e8f0;
+    --text-muted: #94a3b8;
+
+    /* Etkinlik Renkleri */
+    --c-orange: #f97316;
+    --c-green: #10b981;
+    --c-purple: #8b5cf6;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+}
+
+/* --- NAVBAR --- */
+.navbar {
+    background-color: var(--card-bg);
+    border-bottom: 1px solid var(--border-color);
+    padding: 0.8rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+.logo {
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: var(--primary-blue);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 2;
+}
+
+.nav-links {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+}
+
+.nav-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 0.95rem;
+    transition: color 0.3s;
+    font-weight: 500;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--primary-blue);
+}
+
+.user-profile {
+    z-index: 2;
+    text-decoration: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.avatar-circle {
+    width: 36px;
+    height: 36px;
+    background-color: var(--primary-blue);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    transition: opacity 0.3s;
+}
+
+.user-profile:hover .avatar-circle {
+    opacity: 0.9;
+}
+
+/* --- GRID YAPISI --- */
+.main-container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: 260px 1fr 260px;
+    gap: 20px;
+    align-items: start;
+}
+
+.sticky-sidebar {
+    position: sticky;
+    top: 90px;
+    height: calc(100vh - 110px);
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- KART GENEL --- */
+.card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+h3 {
+    font-size: 1rem;
+    margin-bottom: 15px;
+}
+
+/* --- ARAMA KUTUSU --- */
+.search-box {
+    background-color: #0f1115;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    color: var(--text-muted);
+}
+
+.search-box input {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--text-main);
+    margin-left: 10px;
+    width: 100%;
+}
+
+/* --- YENİ FİLTRE ÇUBUĞU TASARIMI (v2 - Mavi Hap & Yazı) --- */
+.filter-bar {
+    display: flex;
+    align-items: center;
+    background-color: #1e2229;
+    border-radius: 50px;
+    padding: 6px;
+    width: 100%;
+    border: 1px solid var(--border-color);
+    margin-bottom: 25px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    gap: 20px;
+}
+
+/* Sol Taraf: Mavi Hap (Şehir) */
+.filter-pill-wrapper {
+    position: relative;
+    background-color: var(--primary-blue);
+    border-radius: 40px;
+    overflow: hidden;
+    min-width: 160px; /* Genişlik ayarı */
+    transition: background-color 0.2s;
+    display: flex;
+    align-items: center;
+}
+
+.filter-pill-wrapper:hover {
+    background-color: #1d4ed8;
+}
+
+.pill-select {
+    width: 100%;
+    padding: 12px 35px 12px 20px; /* Sağ taraf ikon için boşluk */
+    background: transparent;
+    border: none;
+    color: white;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    text-align: left;
+    outline: none;
+}
+
+.pill-select option {
+    background-color: var(--card-bg);
+    color: var(--text-main);
+}
+
+/* Sağ Taraf: Metin (Üniversite) */
+.filter-text-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex: 1;
+    margin-right: 15px;
+}
+
+.text-select {
+    width: 100%;
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    padding: 10px 30px 10px 0;
+    outline: none;
+    transition: color 0.3s;
+}
+
+.text-select:not(:disabled) {
+    color: var(--text-main); /* Aktif olunca beyaz */
+}
+
+.text-select:not(:disabled):hover {
+    opacity: 0.8;
+}
+
+.text-select:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.text-select option {
+    background-color: var(--card-bg);
+    color: var(--text-main);
+    padding: 10px;
+}
+
+/* Ortak Ok İkonu */
+.down-icon {
+    position: absolute;
+    right: 15px;
+    pointer-events: none;
+    font-size: 0.8rem;
+}
+
+/* Mavi hap içindeki ikon beyaz olsun */
+.filter-pill-wrapper .down-icon {
+    color: white;
+}
+
+/* Yazı tarafındaki ikon gri olsun */
+.filter-text-wrapper .down-icon {
+    color: var(--text-muted);
+}
+
+/* --- ETKİNLİK LİSTESİ --- */
+.events-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.event-card {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    transition: transform 0.2s, border-color 0.2s;
+    cursor: pointer;
+}
+
+.event-card:hover {
+    border-color: var(--primary-blue);
+    transform: translateY(-2px);
+}
+
+/* Tarih Kutusu (Sol) */
+.event-date-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 70px;
+    height: 70px;
+    background-color: rgba(249, 115, 22, 0.15);
+    color: var(--c-orange);
+    border-radius: 12px;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.event-date-box .day {
+    font-size: 1.6rem;
+    line-height: 1;
+}
+
+.event-date-box .month {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+}
+
+/* Tarih Kutusu Renk Varyasyonları */
+.blue-box {
+    background-color: rgba(37, 99, 235, 0.15);
+    color: var(--primary-blue);
+}
+
+.green-box {
+    background-color: rgba(16, 185, 129, 0.15);
+    color: var(--c-green);
+}
+
+.purple-box {
+    background-color: rgba(139, 92, 246, 0.15);
+    color: var(--c-purple);
+}
+
+/* Etkinlik Detayları */
+.event-details {
+    flex: 1;
+}
+
+.event-top {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+.host {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.event-title {
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+    color: var(--text-main);
+}
+
+.event-meta {
+    display: flex;
+    gap: 15px;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.event-meta i {
+    color: var(--primary-blue);
+    margin-right: 5px;
+}
+
+/* Badge Stilleri */
+.badge {
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.badge-orange { color: var(--c-orange); background-color: rgba(249, 115, 22, 0.1); }
+.badge-blue { color: var(--primary-blue); background-color: rgba(37, 99, 235, 0.1); }
+.badge-green { color: var(--c-green); background-color: rgba(16, 185, 129, 0.1); }
+.badge-purple { color: var(--c-purple); background-color: rgba(139, 92, 246, 0.1); }
+
+/* Katıl Butonu */
+.event-action {
+    flex-shrink: 0;
+}
+
+.btn-join {
+    padding: 8px 20px;
+    border: 1px solid var(--primary-blue);
+    background-color: transparent;
+    color: var(--primary-blue);
+    border-radius: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-join:hover {
+    background-color: var(--primary-blue);
+    color: white;
+}
+
+.btn-join.joined {
+    background-color: var(--c-green);
+    border-color: var(--c-green);
+    color: white;
+}
+
+/* --- SAĞ PANEL KATEGORİLERİ --- */
+.filter-list {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.filter-item {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    padding: 12px;
+    text-align: left;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: background 0.2s;
+}
+
+.filter-item:hover,
+.filter-item.active {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: var(--text-main);
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.dot.white { background-color: white; }
+.dot.blue { background-color: var(--primary-blue); }
+.dot.orange { background-color: var(--c-orange); }
+.dot.green { background-color: var(--c-green); }
+.dot.purple { background-color: var(--c-purple); }
+
+.add-content-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 12px;
+    background-color: var(--primary-blue);
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background 0.3s;
+    gap: 8px;
+    margin-top: auto;
+}
+
+.add-content-btn:hover {
+    background-color: #1d4ed8;
+}
+
+/* --- MOBİL UYUMLULUK --- */
+@media (max-width: 900px) {
+    .main-container {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar-left,
+    .sidebar-right,
+    .nav-links {
+        display: none;
+    }
+
+    /* Mobil Filtre Çubuğu Düzeni */
+    .filter-bar {
+        flex-direction: row;
+        gap: 10px;
+        border-radius: 12px;
+    }
+
+    .filter-pill-wrapper {
+        min-width: 120px;
+    }
+    
+    .filter-text-wrapper {
+        margin-right: 5px;
+    }
+
+    .event-card {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .event-date-box {
+        width: 100%;
+        height: 40px;
+        flex-direction: row;
+        gap: 10px;
+        justify-content: flex-start;
+        padding-left: 15px;
+        margin-bottom: 10px;
+    }
+
+    .event-date-box .day {
+        font-size: 1.2rem;
+    }
+
+    .event-action {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+    }
+}

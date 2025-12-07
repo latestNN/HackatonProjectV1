@@ -1,0 +1,51 @@
+/* Genel Ayarlar */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    background-color: #0d1117; /* Koyu tema */
+    color: #ffffff;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.verify-container {
+    padding: 40px;
+    max-width: 500px;
+}
+
+/* --- SPINNER (DÖNEN YUVARLAK) --- */
+.spinner {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 30px auto; /* Ortala ve alttan boşluk bırak */
+    border: 5px solid rgba(255, 255, 255, 0.1); /* Silik gri halka */
+    border-top: 5px solid #1d9bf0; /* Mavi dönen kısım */
+    border-radius: 50%;
+    animation: spin 1s linear infinite; /* Dönme animasyonu */
+}
+
+/* Dönme Animasyonu Keyframes */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+h2 {
+    font-size: 28px;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+p {
+    font-size: 16px;
+    color: #8b949e;
+    line-height: 1.5;
+}

@@ -1,0 +1,170 @@
+body {
+    background-color: #0f1624;
+    color: white;
+    font-family: "Segoe UI", sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.success-container {
+    text-align: center;
+}
+
+.checkmark {
+    font-size: 90px;
+    color: #00ff75;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+h1 {
+    font-size: 32px;
+    margin-bottom: 8px;
+}
+
+p {
+    color: #c5cede;
+    margin-bottom: 30px;
+}
+
+.btn {
+    display: block;
+    width: 260px;
+    padding: 15px;
+    font-size: 16px;
+    border-radius: 8px;
+    margin: 10px auto;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+}
+
+.btn.primary {
+    background-color: #2ecc71;
+    color: black;
+    font-weight: bold;
+}
+
+.btn.primary:hover {
+    background-color: #29b866;
+}
+
+.btn.secondary {
+    background-color: transparent;
+    border: 1px solid #c5cede;
+    color: white;
+}
+
+.btn.secondary:hover {
+    background-color: #1f2736;
+}
+
+/* Responsive */
+
+/* 1. DEVASA EKRANLAR (4K - UHD) */
+@media (max-width: 3840px) {
+    .success-container {
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+}
+
+/* 2. ULTRA GENİŞ EKRANLAR (UWQHD) */
+@media (max-width: 3440px) {
+    /* Standart */
+}
+
+/* 3. 2K / QHD EKRANLAR */
+@media (max-width: 2560px) {
+    /* Standart */
+}
+
+/* 4. FULL HD EKRANLAR (1920px) - GÜNCELLENDİ (BÜYÜTÜLDÜ) */
+@media (max-width: 1920px) {
+    .success-container {
+        padding: 0 40px;
+    }
+
+    .checkmark {
+        font-size: 110px; /* İkon büyüdü */
+        margin-bottom: 25px;
+    }
+
+    h1 {
+        font-size: 40px; /* Başlık belirginleşti */
+        margin-bottom: 15px;
+    }
+
+    p {
+        font-size: 18px; /* Açıklama yazısı büyüdü */
+        margin-bottom: 40px;
+    }
+
+    .btn {
+        width: 320px; /* Buton genişledi */
+        padding: 18px; /* Buton yüksekliği arttı */
+        font-size: 18px; /* Buton içi yazı büyüdü */
+        border-radius: 10px;
+    }
+}
+
+/* 5. LAPTOP EKRANLARI (1440px) */
+@media (max-width: 1440px) {
+    .checkmark { font-size: 100px; }
+    h1 { font-size: 36px; }
+    .btn { width: 280px; padding: 16px; font-size: 17px; }
+}
+
+/* 6. TABLET YATAY & KÜÇÜK LAPTOP (1024px) - DOLGUN GÖRÜNÜM */
+@media (max-width: 1024px) {
+    .checkmark {
+        font-size: 120px; 
+        margin-bottom: 25px;
+    }
+
+    h1 {
+        font-size: 42px; 
+        margin-bottom: 15px;
+    }
+
+    p {
+        font-size: 20px;
+        margin-bottom: 40px;
+    }
+    
+    .btn {
+        width: 340px; 
+        padding: 18px; 
+        font-size: 18px; 
+        border-radius: 10px;
+    }
+}
+
+/* 7. TABLET DİKEY (720px) */
+@media (max-width: 720px) {
+    .checkmark { font-size: 80px; margin-bottom: 20px; }
+    h1 { font-size: 32px; }
+    p { font-size: 16px; margin-bottom: 30px; }
+    .btn { width: 280px; padding: 14px; font-size: 16px; }
+}
+
+/* 8. MOBİL GENİŞ (480px) */
+@media (max-width: 480px) {
+    .success-container { padding: 0 20px; width: 100%; }
+    .checkmark { font-size: 70px; }
+    h1 { font-size: 26px; }
+    p { font-size: 14px; }
+    
+    /* Mobilde butonlar ekranı kaplasın */
+    .btn { width: 100%; max-width: 100%; margin: 10px 0; }
+}
+
+/* 9. KÜÇÜK MOBİL (360px) */
+@media (max-width: 360px) {
+    h1 { font-size: 22px; }
+    .checkmark { font-size: 60px; }
+    .btn { padding: 12px; font-size: 14px; }
+}

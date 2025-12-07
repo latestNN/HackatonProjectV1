@@ -1,0 +1,270 @@
+/* --- TEMEL DEĞİŞKENLER --- */
+:root {
+    --bg-dark: #0f1115;
+    --card-bg: #161920;
+    --border-color: #2a2e35;
+    --primary-blue: #2563eb;
+    --danger-red: #ef4444;
+    --text-main: #e2e8f0;
+    --text-muted: #94a3b8;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+body { background-color: var(--bg-dark); color: var(--text-main); }
+
+/* --- NAVBAR STİLLERİ --- */
+.navbar { background-color: var(--card-bg); border-bottom: 1px solid var(--border-color); padding: 0.8rem 0; position: sticky; top: 0; z-index: 1000; }
+.nav-container { max-width: 1200px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; position: relative; }
+.logo { font-weight: bold; font-size: 1.2rem; color: var(--primary-blue); display: flex; gap: 10px; z-index: 2; text-decoration: none; align-items: center; }
+.nav-links { position: absolute; left: 50%; transform: translateX(-50%); display: flex; list-style: none; gap: 20px; }
+.nav-links a { color: var(--text-muted); text-decoration: none; transition: 0.3s; font-weight: 500; }
+.nav-links a:hover { color: var(--primary-blue); }
+.user-profile { text-decoration: none; cursor: pointer; z-index: 2; }
+.avatar-circle { width: 36px; height: 36px; background-color: var(--primary-blue); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; }
+
+/* --- SAYFA DÜZENİ --- */
+.main-container {
+    max-width: 900px; 
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+/* Başlık Alanı */
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.header-left { display: flex; align-items: center; gap: 15px; }
+.header-left h2 { font-size: 1.8rem; color: var(--text-main); }
+
+.back-btn {
+    text-decoration: none;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    display: flex; align-items: center; gap: 5px;
+    transition: color 0.3s;
+}
+.back-btn:hover { color: var(--primary-blue); }
+
+.btn-new-post {
+    background-color: var(--primary-blue);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    display: flex; align-items: center; gap: 8px;
+    transition: background 0.3s;
+}
+.btn-new-post:hover { background-color: #1d4ed8; }
+
+/* --- PAYLAŞIM KARTLARI --- */
+.posts-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.post-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 25px;
+    transition: transform 0.2s, border-color 0.2s;
+}
+
+.post-card:hover {
+    border-color: var(--primary-blue);
+    transform: translateY(-2px);
+}
+
+/* Kart Üst Bilgi */
+.post-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+}
+
+.post-category {
+    background-color: rgba(37, 99, 235, 0.1);
+    color: var(--primary-blue);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: 600;
+}
+
+/* Kart İçeriği */
+.post-title {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+.post-excerpt {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+/* Kart Altı */
+.post-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--border-color);
+    padding-top: 15px;
+}
+
+.post-stats {
+    display: flex;
+    gap: 15px;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+.post-stats span i { margin-right: 5px; }
+
+.post-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.action-btn {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-muted);
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+}
+
+.action-btn:hover { border-color: var(--text-main); color: var(--text-main); }
+.action-btn.delete:hover { border-color: var(--danger-red); color: var(--danger-red); }
+
+
+/* =========================================================
+   RESPONSIVE TASARIM (BÜYÜKTEN KÜÇÜĞE)
+   ========================================================= */
+
+/* 1. DEVASA EKRANLAR (4K - 3840px) */
+@media (max-width: 3840px) {
+    .main-container { max-width: 1800px; margin: 80px auto; }
+    
+    .header-left h2 { font-size: 2.8rem; }
+    .post-title { font-size: 2rem; }
+    .post-excerpt { font-size: 1.4rem; }
+    
+    .btn-new-post { padding: 18px 30px; font-size: 1.4rem; }
+    .action-btn { padding: 12px 20px; font-size: 1.2rem; }
+    
+    .nav-container { max-width: 2400px; }
+    .nav-links a { font-size: 1.4rem; margin: 0 20px; }
+    .logo { font-size: 1.8rem; }
+}
+
+/* 2. ULTRA GENİŞ EKRANLAR (UWQHD - 3440px) */
+@media (max-width: 3440px) {
+    .main-container { max-width: 1600px; }
+    .header-left h2 { font-size: 2.4rem; }
+    .post-title { font-size: 1.8rem; }
+}
+
+/* 3. 2K / QHD EKRANLAR (2560px) */
+@media (max-width: 2560px) {
+    .main-container { max-width: 1300px; }
+    .header-left h2 { font-size: 2rem; }
+    .post-title { font-size: 1.5rem; }
+    .post-excerpt { font-size: 1.1rem; }
+    
+    .btn-new-post { padding: 14px 24px; font-size: 1.1rem; }
+}
+
+/* 4. FULL HD EKRANLAR (1920px) - Standart Büyük */
+@media (max-width: 1920px) {
+    .main-container { max-width: 1000px; margin: 50px auto; }
+    .header-left h2 { font-size: 1.8rem; }
+    .post-title { font-size: 1.3rem; }
+    .post-excerpt { font-size: 1rem; }
+    
+    .btn-new-post { padding: 10px 20px; font-size: 1rem; }
+    .action-btn { padding: 8px 16px; font-size: 0.9rem; }
+    
+    .nav-container { max-width: 1200px; }
+    .nav-links a { font-size: 1rem; margin: 0; }
+    .logo { font-size: 1.2rem; }
+}
+
+/* 5. LAPTOP EKRANLARI (1440px) */
+@media (max-width: 1440px) {
+    .main-container { max-width: 900px; margin: 40px auto; }
+}
+
+/* 6. TABLET YATAY & KÜÇÜK LAPTOP (1024px) */
+@media (max-width: 1024px) {
+    .main-container { max-width: 850px; padding: 0 30px; }
+    
+    /* Navbar linklerini biraz sıkıştıralım */
+    .nav-links { gap: 15px; }
+    .nav-links a { font-size: 0.9rem; }
+}
+
+/* 7. TABLET DİKEY / ARA GEÇİŞ (900px) */
+@media (max-width: 900px) {
+    .main-container { max-width: 100%; padding: 0 25px; }
+    
+    /* Başlık ile buton arasındaki boşluğu koru */
+    .page-header { margin-bottom: 25px; }
+}
+
+/* 8. MOBİL GENİŞ (720px) - KIRILMA NOKTASI */
+@media (max-width: 720px) {
+    /* Navbar Düzeni: Linkleri alta veya menüye alalım */
+    .nav-container { flex-direction: column; gap: 10px; padding-bottom: 15px; }
+    .nav-links { position: static; transform: none; margin-top: 10px; }
+    
+    /* Başlık Alanı: Alt alta */
+    .page-header { flex-direction: column; align-items: flex-start; gap: 15px; }
+    .header-left { width: 100%; justify-content: space-between; }
+    .btn-new-post { width: 100%; justify-content: center; }
+    
+    /* Kart Altı: Alt alta */
+    .post-footer { flex-direction: column; gap: 15px; align-items: flex-start; }
+    .post-stats { width: 100%; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 10px; }
+    .post-actions { width: 100%; justify-content: flex-end; }
+    
+    .action-btn { flex: 1; text-align: center; }
+}
+
+/* 9. STANDART MOBİL (480px) */
+@media (max-width: 480px) {
+    .nav-links { display: none; } /* Linkleri gizle */
+    .nav-container { flex-direction: row; } /* Logo ve profil yan yana kalsın */
+    
+    .header-left h2 { font-size: 1.5rem; }
+    .post-title { font-size: 1.15rem; }
+    
+    .post-card { padding: 20px; }
+    
+    /* Mobilde "Geri" butonu sadece ikon kalsın istenirse metni gizleyebilirsin, 
+       ama şimdilik böyle bırakıyoruz */
+}
+
+/* 10. KÜÇÜK MOBİL (360px) */
+@media (max-width: 360px) {
+    .header-left h2 { font-size: 1.3rem; }
+    .btn-new-post { font-size: 0.9rem; padding: 8px; }
+    
+    .post-card { padding: 15px; }
+    .post-meta { flex-direction: column; gap: 5px; align-items: flex-start; }
+    
+    .action-btn { padding: 8px; font-size: 0.8rem; }
+}

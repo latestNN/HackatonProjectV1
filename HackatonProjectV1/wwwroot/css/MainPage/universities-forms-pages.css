@@ -459,20 +459,141 @@ h3 {
     padding: 10px 15px !important; /* Padding'i koru */
 }
 
-/* --- MOBİL UYUMLULUK --- */
+/* --- RESPONSIVE TASARIM --- */
+
+/* 4K UHD Ekranlar */
+@media (max-width: 3840px) {
+    .main-container {
+        max-width: 2400px;
+        gap: 60px;
+        grid-template-columns: 500px 1fr 500px; 
+    }
+    .nav-container { max-width: 2400px; padding: 0 40px; }
+    .logo { font-size: 1.5rem; }
+    .nav-links a { font-size: 1.1rem; margin: 0 25px; }
+    .btn-auth { font-size: 1rem; padding: 12px 25px; }
+    .sticky-sidebar { top: 120px; height: calc(100vh - 160px); }
+    .card { padding: 30px; margin-bottom: 25px; }
+    h3 { font-size: 1.3rem; margin-bottom: 20px; }
+    .search-box input { font-size: 1.1rem; }
+    .post-title { font-size: 1.4rem; margin-bottom: 15px; }
+    .post-content { font-size: 1.1rem; line-height: 1.5; margin-bottom: 15px; }
+    .username { font-size: 1.1rem; }
+    .time { font-size: 0.9rem; }
+    .avatar { width: 50px; height: 50px; font-size: 1.2rem; }
+    .badge { font-size: 0.85rem; padding: 6px 12px; }
+    .action-btn { font-size: 1.1rem; gap: 10px; }
+    .tag-chip { font-size: 1rem; padding: 10px 20px; }
+    .filter-btn, .add-content-btn { font-size: 1.1rem; padding: 15px; }
+    .tab, .dropdown-btn { font-size: 1.1rem; padding: 12px 0; }
+}
+
+/* Ultra-Wide */
+@media (max-width: 3440px) {
+    .main-container {
+        max-width: 2000px;
+        gap: 40px;
+        grid-template-columns: 450px 1fr 450px;
+    }
+    .nav-container { max-width: 2000px; }
+    .post-title { font-size: 1.3rem; }
+    .post-content { font-size: 1.05rem; }
+}
+
+/* 2K / QHD */
+@media (max-width: 2560px) {
+    .main-container {
+        max-width: 1600px;
+        grid-template-columns: 350px 1fr 350px;
+        gap: 30px;
+    }
+    .nav-container { max-width: 1600px; }
+    .logo { font-size: 1.3rem; }
+    .nav-links a { font-size: 1rem; }
+    .post-title { font-size: 1.2rem; }
+    .post-content { font-size: 1rem; }
+}
+
+/* Standart Laptop */
+@media (max-width: 1440px) {
+    .main-container {
+        max-width: 1200px;
+        grid-template-columns: 260px 1fr 260px; 
+        gap: 20px;
+    }
+}
+
+/* Tablet Yatay */
+@media (max-width: 1024px) {
+    .main-container {
+        grid-template-columns: 220px 1fr 220px;
+        gap: 15px;
+        padding: 0 15px;
+    }
+    .nav-links a { margin: 0 10px; font-size: 0.9rem; }
+    .tag-chip { font-size: 0.8rem; padding: 6px 10px; }
+}
+
+/* Tablet Dikey (Mobil Görünüme Geçiş) */
 @media (max-width: 900px) {
     .main-container {
-        grid-template-columns: 1fr;
+        display: flex;
+        flex-direction: column;
+        margin-top: 10px;
+        gap: 15px;
     }
-    .sidebar-left, .sidebar-right {
-        display: none;
+    .feed { display: contents; }
+    
+    .tabs-container { order: 1; margin-bottom: 0; width: 100%; overflow-x: auto; white-space: nowrap; }
+    .sidebar-left { display: block !important; order: 2; position: static; height: auto; width: 100%; }
+    .sidebar-right { display: block !important; order: 3; position: static; height: auto; width: 100%; }
+    .content-section { order: 4; }
+
+    .nav-links { display: none; }
+    .logo { font-size: 1.1rem; }
+    .btn-auth { padding: 6px 12px; font-size: 0.8rem; }
+    .avatar-circle { width: 32px; height: 32px; font-size: 0.9rem; }
+    .dropdown-menu { width: 200px; }
+    .sidebar-left .card, .sidebar-right .card { margin-bottom: 10px; max-height: 200px; }
+    .add-content-btn { margin: 10px 0 0 0; width: 100%; }
+}
+
+/* Standart Mobil (480px) - GÜNCELLENMİŞ */
+@media (max-width: 480px) {
+    .navbar { padding: 0.5rem 0; }
+    .nav-container { padding: 0 15px; }
+    
+    .logo span { display: none; } /* Sadece ikon kalsın */
+    .logo i { font-size: 1.4rem; }
+
+    .main-container { padding: 0 10px; margin-top: 10px; }
+    
+    .post-title { font-size: 1rem; }
+    .post-content { font-size: 0.9rem; -webkit-line-clamp: 3; }
+    .post-actions { gap: 10px; }
+    .badge { font-size: 0.65rem; padding: 2px 6px; }
+
+    /* --- DÜZELTME BURADA --- */
+
+    /* 1. Etiketler ve Arama kutusundaki Scroll'u Kapat */
+    /* Kutunun boyutu içeriği kadar uzasın */
+    .sidebar-left .card, 
+    .sidebar-right .card {
+        max-height: none !important; /* 900px'teki sınırlamayı kaldır */
+        overflow: visible !important; /* Scroll çubuğunu yok et */
+        height: auto !important;
     }
-    .nav-links {
-        position: static;
-        transform: none;
-        display: none; 
+
+    /* 2. İçerik Ekle Butonunu Aşağı İt */
+    .add-content-btn {
+        margin-top: 30px; /* Filtrele butonuyla arasına mesafe koyduk */
+        margin-bottom: 20px; /* En alttan da biraz boşluk olsun */
+        width: 100%; /* Tam genişlik */
     }
-    .text-truncate {
-        max-width: 120px; 
-    }
+}
+
+/* Küçük Mobil */
+@media (max-width: 360px) {
+    .btn-auth { display: none; }
+    .user-profile { margin-left: auto; }
 }

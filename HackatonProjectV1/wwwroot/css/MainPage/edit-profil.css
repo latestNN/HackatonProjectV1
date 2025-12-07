@@ -1,0 +1,267 @@
+/* --- TEMEL DEĞİŞKENLER --- */
+:root {
+    --bg-dark: #0f1115;
+    --card-bg: #161920;
+    --border-color: #2a2e35;
+    --primary-blue: #2563eb;
+    --text-main: #e2e8f0;
+    --text-muted: #94a3b8;
+    --success-green: #10b981;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+body { background-color: var(--bg-dark); color: var(--text-main); }
+
+/* --- NAVBAR --- */
+.navbar { background-color: var(--card-bg); border-bottom: 1px solid var(--border-color); padding: 0.8rem 0; position: sticky; top: 0; z-index: 1000; }
+.nav-container { max-width: 1200px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; position: relative; }
+.logo { font-weight: bold; font-size: 1.2rem; color: var(--primary-blue); display: flex; gap: 10px; z-index: 2; }
+
+/* Linkleri Tam Ortalamak için Absolute Positioning */
+.nav-links { position: absolute; left: 50%; transform: translateX(-50%); display: flex; list-style: none; gap: 20px; }
+.nav-links a { color: var(--text-muted); text-decoration: none; transition: 0.3s; font-weight: 500; }
+.nav-links a:hover { color: var(--primary-blue); }
+
+.user-profile { z-index: 2; text-decoration: none; cursor: pointer; }
+.avatar-circle { width: 36px; height: 36px; background-color: var(--primary-blue); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; }
+
+/* --- PROFİL KARTI (ORTAK) --- */
+.main-container { max-width: 700px; margin: 40px auto; padding: 0 20px; }
+.profile-card { background-color: var(--card-bg); border: 1px solid var(--border-color); border-radius: 16px; padding: 40px; box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
+.profile-header { text-align: center; margin-bottom: 30px; }
+.profile-header h2 { font-size: 1.8rem; margin-bottom: 5px; }
+.profile-header p { color: var(--text-muted); font-size: 0.95rem; }
+
+/* --- KULLANICI ÖZETİ --- */
+.user-summary { display: flex; flex-direction: column; align-items: center; margin-bottom: 30px; padding-bottom: 30px; border-bottom: 1px solid var(--border-color); }
+.avatar-large { width: 80px; height: 80px; background-color: var(--primary-blue); color: white; font-size: 2rem; font-weight: bold; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 15px; box-shadow: 0 0 15px rgba(37, 99, 235, 0.3); }
+.user-identity { text-align: center; }
+.user-identity h3 { font-size: 1.4rem; margin-bottom: 5px; }
+.user-identity .handle { color: var(--text-muted); font-size: 1rem; }
+
+/* --- BİLGİ LİSTESİ (GÖRÜNTÜLEME) --- */
+.info-list { display: flex; flex-direction: column; gap: 20px; }
+.info-item { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.03); }
+.info-item:last-child { border-bottom: none; }
+.info-item label { color: var(--text-muted); font-weight: 500; font-size: 0.95rem; }
+.info-value { color: var(--text-main); font-weight: 600; font-size: 1rem; text-align: right; }
+.status-active { color: var(--success-green); display: flex; align-items: center; gap: 8px; }
+
+/* --- DÜZENLEME FORMU (INPUTLAR - Edit Sayfası İçin) --- */
+.info-item-edit { margin-bottom: 15px; }
+
+.info-item-edit label {
+    display: block;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.info-item-edit label i { margin-right: 8px; color: var(--primary-blue); }
+
+.info-item-edit input {
+    width: 100%;
+    padding: 12px 15px;
+    background-color: #0f1115; /* Koyu zemin */
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    color: var(--text-main);
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.info-item-edit input:focus { border-color: var(--primary-blue); }
+
+/* Salt Okunur Inputlar (Gri) */
+.readonly-input {
+    background-color: rgba(255, 255, 255, 0.03) !important;
+    cursor: not-allowed;
+    border-color: transparent !important;
+    color: #64748b !important;
+}
+
+/* Şifre Göz İkonu */
+.input-wrapper { position: relative; }
+.toggle-password {
+    position: absolute; right: 15px; top: 50%; transform: translateY(-50%);
+    color: var(--text-muted); cursor: pointer;
+}
+
+/* E-posta düzenleme ikonu aktif olunca */
+#emailUnlock.active {
+    color: var(--primary-blue); 
+}
+#emailUnlock:hover {
+    color: var(--text-main);
+}
+
+.divider {
+    height: 1px; background-color: var(--border-color); margin: 25px 0; opacity: 0.5;
+}
+
+/* --- BUTONLAR --- */
+.action-area {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+/* Profil sayfasındaki butonlar */
+.btn-blue {
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    background-color: var(--primary-blue); color: white; text-decoration: none;
+    padding: 12px 0; width: 200px; border-radius: 30px; font-weight: 600;
+    transition: background 0.3s, transform 0.2s; border: 1px solid transparent;
+}
+.btn-blue:hover { background-color: #1d4ed8; transform: translateY(-2px); }
+
+/* Edit sayfasındaki Kaydet Butonu */
+.btn-save {
+    background-color: var(--primary-blue); color: white; border: none;
+    padding: 12px 30px; border-radius: 30px; font-weight: 600; cursor: pointer;
+    font-size: 1rem; transition: background 0.3s; flex: 1; display: flex; justify-content: center; text-decoration: none;
+}
+.btn-save:hover { background-color: #1d4ed8; }
+
+/* Edit sayfasındaki İptal Butonu */
+.btn-cancel {
+    background-color: transparent; color: var(--text-muted);
+    border: 1px solid var(--border-color); padding: 12px 30px;
+    border-radius: 30px; font-weight: 600; text-decoration: none;
+    display: flex; align-items: center; justify-content: center; transition: all 0.3s;
+}
+.btn-cancel:hover { border-color: var(--text-main); color: var(--text-main); }
+
+/* --- RESPONSIVE TASARIM (Media Queries) --- */
+
+/* 1. DEVASA EKRANLAR (4K - UHD) */
+@media (max-width: 3840px) {
+    .main-container { max-width: 1400px; margin: 80px auto; }
+    .profile-card { padding: 60px; max-width: 1000px; }
+    
+    /* Font ve Başlık Büyütme */
+    .profile-header h2 { font-size: 2.5rem; }
+    .profile-header p { font-size: 1.2rem; }
+    
+    /* Avatar Büyütme */
+    .avatar-large { width: 140px; height: 140px; font-size: 3.5rem; }
+    
+    /* Input (Düzenleme) Alanlarını Büyütme */
+    .info-item-edit label { font-size: 1.3rem; margin-bottom: 12px; }
+    .info-item-edit input { padding: 20px; font-size: 1.3rem; border-radius: 12px; }
+    
+    /* Görüntüleme Listesi */
+    .info-item label { font-size: 1.3rem; }
+    .info-value { font-size: 1.4rem; }
+    
+    /* Butonlar */
+    .btn-blue, .btn-save, .btn-cancel { 
+        width: 300px; padding: 20px; font-size: 1.3rem; border-radius: 40px; 
+    }
+    .action-area { gap: 30px; margin-top: 50px; }
+    
+    /* Navbar */
+    .nav-container { max-width: 2200px; }
+    .logo { font-size: 2rem; }
+    .nav-links { gap: 40px; }
+    .nav-links a { font-size: 1.5rem; }
+}
+
+/* 2. ULTRA GENİŞ EKRANLAR (UWQHD) */
+@media (max-width: 3440px) {
+    .profile-card { max-width: 900px; }
+    .btn-blue, .btn-save, .btn-cancel { width: 260px; }
+}
+
+/* 3. 2K / QHD EKRANLAR */
+@media (max-width: 2560px) {
+    .main-container { max-width: 1100px; }
+    .info-item-edit input { padding: 15px; font-size: 1.1rem; }
+}
+
+/* 4. FULL HD EKRANLAR (Standart) */
+@media (max-width: 1920px) {
+    /* Temel CSS burası için ayarlı */
+}
+
+/* 5. LAPTOP EKRANLARI */
+@media (max-width: 1440px) {
+    .main-container { max-width: 800px; }
+    .profile-card { padding: 35px; }
+}
+
+/* 6. TABLET YATAY & KÜÇÜK LAPTOP (1024px) */
+@media (max-width: 1024px) {
+    .main-container { padding: 0 30px; }
+    .nav-links a { margin: 0 10px; font-size: 0.95rem; }
+}
+
+/* 7. TABLET DİKEY (720px) - KIRILMA NOKTASI */
+@media (max-width: 720px) {
+    
+    /* Navbar Düzeni */
+    .nav-container { flex-direction: column; gap: 15px; padding-bottom: 10px; }
+    .nav-links { position: static; transform: none; margin-top: 10px; order: 3; }
+    
+    /* Profil Kartı */
+    .profile-card { padding: 30px 20px; }
+    
+    /* Avatar */
+    .avatar-large { width: 70px; height: 70px; font-size: 1.8rem; }
+    
+    /* Fontlar */
+    .profile-header h2 { font-size: 1.6rem; }
+    
+    /* Inputlar */
+    .info-item-edit input { padding: 12px; font-size: 0.95rem; }
+}
+
+/* 8. MOBİL GENİŞ (480px) - MOBİL MODU */
+@media (max-width: 480px) {
+    
+    /* Navbar Linklerini Gizle */
+    .nav-links { display: none; }
+    .nav-container { flex-direction: row; }
+    
+    /* -- PROFİL GÖRÜNTÜLEME MODU -- */
+    /* Bilgileri alt alta al (Label üstte, Değer altta) */
+    .info-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+        padding: 12px 0;
+    }
+    .info-value { text-align: left; width: 100%; }
+    
+    /* -- PROFİL DÜZENLEME MODU -- */
+    /* Input başlıklarını biraz küçült */
+    .info-item-edit label { font-size: 0.85rem; }
+    
+    /* -- BUTONLAR -- */
+    /* Butonları alt alta ve tam genişlik yap */
+    .action-area {
+        flex-direction: column;
+        gap: 12px;
+        width: 100%;
+    }
+    
+    /* Hem mavi buton, hem kaydet, hem iptal butonu %100 olsun */
+    .btn-blue, 
+    .btn-save, 
+    .btn-cancel {
+        width: 100%;
+        padding: 14px;
+        justify-content: center;
+    }
+}
+
+/* 9. KÜÇÜK MOBİL (360px) */
+@media (max-width: 360px) {
+    .profile-header h2 { font-size: 1.4rem; }
+    .logo { font-size: 1rem; }
+    .info-item-edit input { font-size: 0.9rem; padding: 10px; }
+    .btn-save, .btn-cancel { padding: 12px; font-size: 0.9rem; }
+}

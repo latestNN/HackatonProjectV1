@@ -175,12 +175,114 @@ body { background-color: var(--bg-dark); color: var(--text-main); }
     transform: translateY(-2px);
 }
 
-/* Mobil Uyumluluk */
-@media (max-width: 600px) {
-    .info-item { flex-direction: column; align-items: flex-start; gap: 5px; }
-    .info-value { text-align: left; }
-    .nav-links { display: none; }
+@media (max-width: 3840px) {
+    .main-container { max-width: 1400px; }
+    .profile-card { padding: 60px; max-width: 900px; margin: 60px auto; }
     
-    .action-area { flex-direction: column; }
-    .btn-blue { width: 100%; }
+    /* Font ve Buton Büyütme */
+    .profile-header h2 { font-size: 2.5rem; }
+    .btn-blue { width: 280px; padding: 18px; font-size: 1.2rem; }
+    .avatar-large { width: 120px; height: 120px; font-size: 3rem; }
+    
+    /* Navbar Genişletme */
+    .nav-container { max-width: 2000px; }
+}
+
+/* 2. ULTRA GENİŞ EKRANLAR (UWQHD) */
+@media (max-width: 3440px) {
+    .profile-card { max-width: 800px; }
+}
+
+/* 3. 2K / QHD EKRANLAR */
+@media (max-width: 2560px) {
+    .main-container { max-width: 1000px; }
+    /* Standarttan biraz daha büyük kalabilir */
+}
+
+/* 4. FULL HD EKRANLAR (Standart) */
+@media (max-width: 1920px) {
+    /* Temel CSS zaten burası için ayarlı */
+}
+
+/* 5. LAPTOP EKRANLARI */
+@media (max-width: 1440px) {
+    .main-container { max-width: 700px; }
+    .nav-links { gap: 15px; } /* Linkleri biraz yaklaştır */
+}
+
+/* 6. TABLET YATAY & KÜÇÜK LAPTOP (1024px) */
+@media (max-width: 1024px) {
+    .main-container { padding: 0 30px; }
+    
+    /* Navbar Linklerini biraz daha sıkıştır */
+    .nav-links a { font-size: 0.9rem; margin: 0 5px; }
+}
+
+/* 7. TABLET DİKEY (720px) - KIRILMA NOKTASI */
+@media (max-width: 720px) {
+    
+    /* Navbar Düzeni Değişiyor: Linkleri alta alalım */
+    .nav-container { 
+        flex-direction: column; 
+        gap: 15px; 
+        padding-bottom: 10px;
+    }
+    
+    .nav-links {
+        position: static; /* Ortalamayı iptal et */
+        transform: none;
+        margin-top: 10px;
+        order: 3; /* En alta at */
+    }
+    
+    /* Profil Kartı Sıkışmasın */
+    .profile-card { padding: 30px 20px; }
+    
+    /* Bilgi Listesi */
+    .info-item { padding: 12px 0; }
+    .info-value { font-size: 0.95rem; }
+}
+
+/* 8. MOBİL GENİŞ (480px) */
+@media (max-width: 480px) {
+    /* Navbar Linklerini Gizle (Mobilde kalabalık yapar) */
+    .nav-links { display: none; } 
+    
+    .nav-container { flex-direction: row; } /* Logoyu ve profili tekrar yan yana al */
+    
+    /* Butonları Alt Alta Yap (ÖNEMLİ) */
+    .action-area {
+        flex-direction: column;
+        gap: 12px;
+        width: 100%;
+    }
+    
+    .btn-blue {
+        width: 100%; /* Tam genişlik */
+        padding: 14px;
+    }
+    
+    /* Bilgi Listesini Dikey Yap (Label üstte, Veri altta) */
+    .info-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+    
+    .info-value {
+        text-align: left;
+        width: 100%;
+    }
+    
+    .avatar-large { width: 70px; height: 70px; font-size: 1.8rem; }
+}
+
+/* 9. KÜÇÜK MOBİL (360px) */
+@media (max-width: 360px) {
+    .profile-header h2 { font-size: 1.5rem; }
+    .logo { font-size: 1rem; }
+    
+    .btn-blue { font-size: 0.9rem; padding: 12px; }
+    
+    .profile-card { padding: 20px 15px; }
 }
