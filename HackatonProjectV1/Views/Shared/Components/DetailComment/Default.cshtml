@@ -1,0 +1,14 @@
+﻿@model List<HackatonProjectV1.Entities.MainPageElements.Comments>
+
+@foreach (var item in Model)
+{
+    <div class="comment">
+        <div class="avatar av-blue small">A</div>
+        <div class="comment-body">
+            <div class="comment-meta"><strong>@item.User.NameAndLastname</strong> <span>@item.CreateTime</span></div>
+            <p>@item.Content</p>
+        </div>
+    </div>
+}
+
+

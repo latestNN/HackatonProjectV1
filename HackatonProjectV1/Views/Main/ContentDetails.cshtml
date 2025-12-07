@@ -1,0 +1,88 @@
+﻿@model HackatonProjectV1.Entities.MainPageElements.Content
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gönderi Detayı - UniForum</title>
+    <link rel="stylesheet" href="~/css/MainPage/shares.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fa-solid fa-graduation-cap"></i> UniForum
+            </div>
+            <nav class="nav-links">
+                <a href="index.html">Ana Sayfa</a>
+                <a href="universities.html">Üniversiteler</a>
+                <a href="#">Forumlar</a>
+            </nav>
+            <a href="profile.html" class="user-profile">
+                <div class="avatar-circle">KY</div>
+            </a>
+        </div>
+    </header>
+
+    <div class="main-container">
+
+        <div class="back-link-container">
+            <a href="index.html" class="back-link">
+                <i class="fa-solid fa-arrow-left"></i> Geri Dön
+            </a>
+        </div>
+
+        <main class="feed-detail">
+
+            <article class="card post-card-detail" id="detailCard">
+                <div class="post-header">
+                    <div class="user-info">
+                        <div class="avatar" id="d-avatar">U</div>
+                        <div class="meta">
+                            <span class="username" id="d-user">@Model.User.UserName</span>
+                            <span class="time" id="d-time">@Model.CreateTime</span>
+                        </div>
+                    </div>
+                    <span class="badge" id="d-badge">@Model.Label</span>
+                </div>
+
+                <h1 class="post-title-large" id="d-title">@Model.Title</h1>
+
+                <p class="post-content-full" id="d-content">
+                   @Model.Description
+                </p>
+
+                <div class="post-actions-large">
+                    <button class="action-btn btn-like"><i class="fa-regular fa-thumbs-up"></i> @Model.Like</button>
+                    <button class="action-btn btn-dislike"><i class="fa-regular fa-thumbs-down"></i> @Model.Dislike</button>
+                </div>
+            </article>
+
+            <div class="comments-section">
+                <form asp-action="AddCommit" asp-controller="Main" method="post">
+                    <div class="comment-input-form">
+                        <input name="comment"  type="text" placeholder="Yorumunu yaz...">
+                        <button type="submit" class="btn-send">
+                            <i class="fa-solid fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </form>
+
+                <h3 style="margin-top: 30px;">Yorumlar (@ViewBag.commentCount)</h3>
+
+                @await Component.InvokeAsync("DetailComment", new { id = Model.Id})
+                
+            </div>
+
+        </main>
+    </div>
+
+    <script src="~/js/MainPage/shares.js"></script>
+</body>
+</html>

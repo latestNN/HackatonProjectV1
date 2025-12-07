@@ -184,34 +184,34 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // --- 6. KARTLARA TIKLAYINCA DETAY SAYFASINA GİT (YENİ) ---
-    postCards.forEach(card => {
-        card.addEventListener('click', (e) => {
-            // Eğer tıklanan yer bir butonsa (yukarıda stopPropagation yaptık ama garanti olsun)
-            if (e.target.closest('.action-btn')) return;
+    //postCards.forEach(card => {
+    //    card.addEventListener('click', (e) => {
+    //        // Eğer tıklanan yer bir butonsa (yukarıda stopPropagation yaptık ama garanti olsun)
+    //        //if (e.target.closest('.action-btn')) return;
 
-            // Karttaki verileri topla
-            const title = card.querySelector('.post-title').innerText;
-            const content = card.querySelector('.post-content').innerText;
-            const username = card.querySelector('.username').innerText;
-            const time = card.querySelector('.time').innerText;
-            const badge = card.querySelector('.badge').innerText;
-            const badgeClass = card.querySelector('.badge').className; 
-            const avatarText = card.querySelector('.avatar').innerText;
-            const avatarClass = card.querySelector('.avatar').className; 
+    //        //// Karttaki verileri topla
+    //        //const title = card.querySelector('.post-title').innerText;
+    //        //const content = card.querySelector('.post-content').innerText;
+    //        //const username = card.querySelector('.username').innerText;
+    //        //const time = card.querySelector('.time').innerText;
+    //        //const badge = card.querySelector('.badge').innerText;
+    //        //const badgeClass = card.querySelector('.badge').className; 
+    //        //const avatarText = card.querySelector('.avatar').innerText;
+    //        //const avatarClass = card.querySelector('.avatar').className; 
 
-            // Verileri URL Parametresi yap
-            const params = new URLSearchParams();
-            params.append('title', title);
-            params.append('content', content);
-            params.append('user', username);
-            params.append('time', time);
-            params.append('badge', badge);
-            params.append('badgeClass', badgeClass);
-            params.append('avText', avatarText);
-            params.append('avClass', avatarClass);
+    //        //// Verileri URL Parametresi yap
+    //        //const params = new URLSearchParams();
+    //        //params.append('title', title);
+    //        //params.append('content', content);
+    //        //params.append('user', username);
+    //        //params.append('time', time);
+    //        //params.append('badge', badge);
+    //        //params.append('badgeClass', badgeClass);
+    //        //params.append('avText', avatarText);
+    //        //params.append('avClass', avatarClass);
 
-            // Yönlendir
-            window.location.href = 'shares.html?' + params.toString();
-        });
-    });
+    //        // Yönlendir
+    //        window.location.href = 'https://www.youtube.com/';
+    //    });
+    //});
 });
