@@ -4,6 +4,7 @@ using HackatonProjectV1.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HackatonProjectV1.Migrations
 {
     [DbContext(typeof(HtContext))]
-    partial class HtContextModelSnapshot : ModelSnapshot
+    [Migration("20251214205038_mig_complaint_added")]
+    partial class mig_complaint_added
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -187,9 +190,6 @@ namespace HackatonProjectV1.Migrations
 
                     b.Property<int>("Label")
                         .HasColumnType("int");
-
-                    b.Property<bool>("Status")
-                        .HasColumnType("bit");
 
                     b.Property<int?>("Support")
                         .HasColumnType("int");
@@ -504,7 +504,7 @@ namespace HackatonProjectV1.Migrations
 
             modelBuilder.Entity("HackatonProjectV1.Entities.MainPageElements.Comments", b =>
                 {
-                    b.HasOne("HackatonProjectV1.Entities.MainPageElements.Complaint", "Complaint")
+                    b.HasOne("HackatonProjectV1.Entities.MainPageElements.Complaint", null)
                         .WithMany("comments")
                         .HasForeignKey("ComplaintId");
 
@@ -518,8 +518,6 @@ namespace HackatonProjectV1.Migrations
                         .WithMany("comments")
                         .HasForeignKey("contentId");
 
-                    b.Navigation("Complaint");
-
                     b.Navigation("User");
 
                     b.Navigation("content");
@@ -528,19 +526,19 @@ namespace HackatonProjectV1.Migrations
             modelBuilder.Entity("HackatonProjectV1.Entities.MainPageElements.Complaint", b =>
                 {
                     b.HasOne("HackatonProjectV1.Entities.MainPageElements.Faculty", "faculty")
-                        .WithMany("complaints")
+                        .WithMany()
                         .HasForeignKey("FacultyId");
 
                     b.HasOne("HackatonProjectV1.Entities.MainPageElements.University", "university")
-                        .WithMany("complaints")
+                        .WithMany()
                         .HasForeignKey("UniversityId");
 
                     b.HasOne("HackatonProjectV1.Entities.AppUser", "User")
-                        .WithMany("complaints")
+                        .WithMany()
                         .HasForeignKey("UserId");
 
                     b.HasOne("HackatonProjectV1.Entities.MainPageElements.Department", "department")
-                        .WithMany("complaints")
+                        .WithMany()
                         .HasForeignKey("departmentId");
 
                     b.Navigation("User");
@@ -667,8 +665,6 @@ namespace HackatonProjectV1.Migrations
                 {
                     b.Navigation("comments");
 
-                    b.Navigation("complaints");
-
                     b.Navigation("contents");
                 });
 
@@ -686,16 +682,12 @@ namespace HackatonProjectV1.Migrations
                 {
                     b.Navigation("appUsers");
 
-                    b.Navigation("complaints");
-
                     b.Navigation("contents");
                 });
 
             modelBuilder.Entity("HackatonProjectV1.Entities.MainPageElements.Faculty", b =>
                 {
                     b.Navigation("appUsers");
-
-                    b.Navigation("complaints");
 
                     b.Navigation("contents");
 
@@ -705,8 +697,6 @@ namespace HackatonProjectV1.Migrations
             modelBuilder.Entity("HackatonProjectV1.Entities.MainPageElements.University", b =>
                 {
                     b.Navigation("appUsers");
-
-                    b.Navigation("complaints");
 
                     b.Navigation("contents");
 

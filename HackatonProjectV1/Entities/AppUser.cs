@@ -21,6 +21,7 @@ namespace HackatonProjectV1.Entities
         public ICollection<Content> contents { get; set; }
 
         public ICollection<Comments> comments { get; set; }
+        public ICollection<Complaint> complaints { get; set; }
 
         public int? UniversityId { get; set; }
 

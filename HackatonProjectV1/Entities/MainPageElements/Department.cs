@@ -17,5 +17,7 @@
         public ICollection<AppUser> appUsers { get; set; }
 
         public ICollection<Content> contents { get; set; }
+
+        public ICollection<Complaint> complaints { get; set; }
     }
 }

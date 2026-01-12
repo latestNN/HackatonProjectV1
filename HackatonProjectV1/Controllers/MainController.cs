@@ -22,8 +22,112 @@ namespace HackatonProjectV1.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var user = _userManager.GetUserAsync(User).Result;
+            var univercityId = user.UniversityId;
+            return RedirectToAction("UnivercityPage", new { Id = univercityId });
         }
+
+
+        public IActionResult UnivercityPage(int Id)
+        {
+            
+            var univercity = _context.universities.Where(x => x.Id == Id).FirstOrDefault();
+            ViewBag.univercityId = Id;
+            //ViewBag.univercityName = univercity.Name;
+            //ViewBag.univercityCity = univercity.City;
+            //ViewBag.userDepartmentId = user.departmentId;
+            ViewBag.studentCount = _userManager.Users.Where(x => x.UniversityId == Id).Count();
+            var departments = _context.departments.Where(x => x.UniversityId == Id).ToList();
+
+            return View(departments);
+        }
+
+        public IActionResult Problems(int univercityId)
+        {
+
+            ViewBag.SelectedFilter = "all"; // Varsayılan olarak "Tümü" seçili gelsin
+            TempData["UnivecityId"] = univercityId;
+            
+            
+                var problems = _context.complaints.Include(z => z.User).Include(y => y.comments).Where(x => x.UniversityId == 18).ToList();
+                return View(problems);
+            
+            
+        }
+
+        public IActionResult ProblemDetail(int Id)
+        {
+            
+            var problem = _context.complaints.Include(z => z.User).Where(x => x.Id == Id).FirstOrDefault();
+            if(problem != null)
+            {
+                TempData["ComplaintId"] = Id;
+                ViewBag.commentCount = _context.comments.Where(x => x.ComplaintId == Id).Count();
+                return View(problem);
+            }
+            else
+            {
+                return RedirectToAction("Problems");    
+            }
+                
+        }
+
+        [HttpPost]
+        public IActionResult FilterComplaint(string filter)
+
+        {
+            int univercityId = Convert.ToInt32(TempData["UnivecityId"]);
+            TempData.Keep("UnivecityId"); // TempData okunduktan sonra silinmemesi için Keep ediyoruz.
+
+            List<Complaint> complaints = new List<Complaint>();
+            
+            if (filter == "all")
+            {
+                complaints = _context.complaints.Include(z => z.User).Include(y => y.comments).Where(x => x.UniversityId == univercityId).ToList();
+                ViewBag.SelectedFilter = filter;
+                return View("Problems", complaints);
+            }
+            else if (filter == "mostSupported")
+            {
+                complaints = _context.complaints.Include(z => z.User).Include(y => y.comments).Where(x => x.UniversityId == univercityId).OrderByDescending(x => x.Support).ToList();
+                ViewBag.SelectedFilter = filter;
+                return View("Problems", complaints);
+            }
+            else if (filter == "solved")
+            {
+                complaints = _context.complaints.Include(z => z.User).Include(y => y.comments).Where(x => x.UniversityId == univercityId).Where(x => x.Status == true).ToList();
+                ViewBag.SelectedFilter = filter;
+                return View("Problems", complaints);
+            }
+            else if (filter == "newest")
+            {
+                complaints = _context.complaints.Include(z => z.User).Include(y => y.comments).Where(x => x.UniversityId == univercityId).OrderByDescending(x => x.CreateTime).ToList();
+                ViewBag.SelectedFilter = filter;
+                return View("Problems", complaints);
+            }
+
+            // Eğer yukarıdaki if'lere girmezse (beklenmeyen durum) varsayılan döndür:
+            ViewBag.SelectedFilter = filter;
+            return View("Problems", complaints);
+        }
+
+        public IActionResult AddComplaintCommit(string comment)
+        {
+            int complaintId = Convert.ToInt32(TempData["ComplaintId"]);
+            var userId = _userManager.GetUserId(User);
+            _context.comments.Add(new Entities.MainPageElements.Comments
+            {
+                UserId = userId,
+                Content = comment,
+                ComplaintId = complaintId,
+                CreateTime = DateTime.Now
+
+
+            });
+            _context.SaveChanges();
+            return RedirectToAction("ProblemDetail", new { Id = complaintId });
+        }
+
 
         [HttpPost]
         public IActionResult UseFilter(LabelSelectionViewModel  model)

@@ -1,0 +1,141 @@
+@model List<HackatonProjectV1.ViewModel.UserViewModel>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kullanıcı Yönetimi - Admin Paneli</title>
+    <link rel="stylesheet" href="~/css/AdminPage/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Add some specific styles for the table if not present in admin.css */
+        .users-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .users-table th, .users-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        .users-table th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+        }
+        .users-table tr:hover {
+            background-color: #f8f9fa;
+        }
+        .btn-create {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+        .action-icon {
+            margin: 0 5px;
+            cursor: pointer;
+            color: #555;
+        }
+        .action-icon:hover {
+            color: #000;
+        }
+        .btn-edit { color: #2196F3; }
+        .btn-delete { color: #F44336; }
+    </style>
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <h2>Panel v1.0</h2>
+        </div>
+
+        <div class="admin-profile">
+            <div class="admin-avatar">
+                <i class="fa-solid fa-user-tie"></i>
+            </div>
+            <div class="admin-info">
+                <h3>Admin İsmi</h3>
+                <span>Süper Yönetici</span>
+            </div>
+        </div>
+
+        <nav class="menu">
+            <ul>
+                <li><a href="/Admin/ApproveUsers"><i class="fa-solid fa-list-check"></i> Başvurular</a></li>
+                <li><a href="/Admin/Users" class="active"><i class="fa-solid fa-users"></i> Öğrenciler</a></li>
+                <li><a href="#"><i class="fa-solid fa-gear"></i> Ayarlar</a></li>
+                <li><a href="#" class="logout"><i class="fa-solid fa-right-from-bracket"></i> Çıkış</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <header>
+            <h1>Öğrenci Yönetimi</h1>
+        </header>
+
+        <div class="content-wrapper">
+            <a href="/Admin/CreateUser" class="btn-create"><i class="fa-solid fa-plus"></i> Yeni Öğrenci Ekle</a>
+
+            <table class="users-table">
+                <thead>
+                    <tr>
+                        <th>Ad Soyad</th>
+                        <th>Email</th>
+                        <th>TC No</th>
+                        <th>Öğrenci No</th>
+                        <th>Üniversite</th>
+                        <th>Durum</th>
+                        <th>İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var user in Model)
+                    {
+                        <tr>
+                            <td>@user.NameAndLastname</td>
+                            <td>@user.Email</td>
+                            <td>@user.TcNo</td>
+                            <td>@user.StudentBarcode</td>
+                            <td>@(user.university?.Name ?? "-")</td>
+                            <td>
+                                @if (user.IsApproved)
+                                {
+                                    <span style="color: green;"><i class="fa-solid fa-check-circle"></i> Onaylı</span>
+                                }
+                                else
+                                {
+                                    <span style="color: orange;"><i class="fa-solid fa-clock"></i> Bekliyor</span>
+                                }
+                            </td>
+                            <td>
+                                <a href="/Admin/EditUser/@user.Id" class="action-icon btn-edit" title="Düzenle"><i class="fa-solid fa-pen"></i></a>
+                                <form action="/Admin/DeleteUser/@user.Id" method="post" style="display:inline;" onsubmit="return confirm('Bu kullanıcıyı silmek istediğinize emin misiniz?');">
+                                    <button type="submit" class="action-icon btn-delete" style="border:none; background:none; cursor:pointer;" title="Sil"><i class="fa-solid fa-trash"></i></button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <script>
+        // Any scripts needed
+    </script>
+</body>
+</html>

@@ -35,7 +35,7 @@ namespace HackatonProjectV1.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
-            // 1. Model kurallara uyuyor mu? (Email formatı doğru mu, boş mu vs.)
+            
             if (ModelState.IsValid)
             {
                 var user = new AppUser
@@ -43,39 +43,36 @@ namespace HackatonProjectV1.Controllers
                     UserName = model.Email,
                     Email = model.Email,
 
-                    // Yeni alanları buraya ekliyoruz:
+                    
                     NameAndLastname = model.NameAndLastname,
                     TcNo = model.TcNo,
                     StudentBarcode = model.StudentBarcode,
-                    IsApproved = false // Yeni kullanıcılar başlangıçta onaylı değil
+                    IsApproved = false 
                 };
 
-                // 2. Kullanıcıyı oluştur (Şifreyi otomatik hash'ler)
+                
                 var result = await _userManager.CreateAsync(user, model.Password);
 
                 if (result.Succeeded)
                 {
-                    // Başarılıysa kullanıcıyı içeri al (Login yap) ve Anasayfaya gönder
+                    
                     await _signInManager.SignInAsync(user, isPersistent: false);
-                    //TempData["barcode"] = model.StudentBarcode;                    
+                                        
                     return RedirectToAction("Index", "Main");
                 }
 
-                // Hata varsa (örn: Bu email zaten kayıtlı), hataları modele ekle
+                
                 foreach (var error in result.Errors)
                 {
                     ModelState.AddModelError("", error.Description);
                 }
             }
 
-            // Hata varsa formu tekrar göster
+            
             return View(model);
         }
 
-        //public IActionResult Verify()
-        //{
-        //    return RedirectToAction("Index", "Home");
-        //}
+        
 
         [HttpGet]
         public IActionResult Login()
@@ -98,12 +95,12 @@ namespace HackatonProjectV1.Controllers
 
                     if (result.Succeeded)
                     {
-                        // Başarılıysa Anasayfaya gönder
+                        
                         return RedirectToAction("Index", "Main");
                     }
                 }
 
-                // Kullanıcı yoksa veya şifre yanlışsa:
+                
                 ModelState.AddModelError("", "Email veya şifre hatalı.");
             }
 
