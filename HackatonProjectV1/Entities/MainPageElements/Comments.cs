@@ -14,6 +14,12 @@
 
         public AppUser User { get; set; }
 
+        public int? ComplaintId { get; set; }
+
+        public Complaint? Complaint { get; set; }
+
+
+
         public DateTime? CreateTime { get; set; }
 
 

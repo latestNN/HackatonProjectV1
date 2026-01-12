@@ -1,14 +1,36 @@
-﻿@model List<HackatonProjectV1.Entities.MainPageElements.Comments>
+﻿ @* @model List<dynamic>  *@
 
-@foreach (var item in Model)
-{
-    <div class="comment">
-        <div class="avatar av-blue small">A</div>
-        <div class="comment-body">
-            <div class="comment-meta"><strong>@item.User.NameAndLastname</strong> <span>@item.CreateTime</span></div>
-            <p>@item.Content</p>
-        </div>
-    </div>
+@{
+    if (ViewBag.commentType == "content")
+    {
+        
+        @foreach (var item in ViewBag.contentComments)
+        {
+            <div class="comment">
+                <div class="avatar av-blue small">A</div>
+                <div class="comment-body">
+                    <div class="comment-meta"><strong>@item.User.NameAndLastname</strong> <span>@item.CreateTime</span></div>
+                    <p>@item.Content</p>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        
+        @foreach (var item in ViewBag.complaintComments)
+        {
+            <div class="comment">
+                <div class="avatar av-blue small">A</div>
+                <div class="comment-body">
+                    <div class="comment-meta"><strong>@item.User.NameAndLastname</strong> <span>@item.CreateTime</span></div>
+                    <p>@item.Content</p>
+                </div>
+            </div>
+        }
+    }
 }
+
+
 
 

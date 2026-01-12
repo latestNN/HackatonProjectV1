@@ -1,4 +1,4 @@
-﻿@model HackatonProjectV1.Entities.MainPageElements.Content
+﻿@model HackatonProjectV1.Entities.MainPageElements.Complaint
 @{
     Layout = null;
 }
@@ -55,19 +55,19 @@
                 <h1 class="post-title-large" id="d-title">@Model.Title</h1>
 
                 <p class="post-content-full" id="d-content">
-                   @Model.Description
+                    @Model.Description
                 </p>
 
                 <div class="post-actions-large">
-                    <button class="action-btn btn-like"><i class="fa-regular fa-thumbs-up"></i> @Model.Like</button>
+                    <button class="action-btn btn-like"><i class="fa-regular fa-thumbs-up"></i> @Model.Support</button>
                     <button class="action-btn btn-dislike"><i class="fa-regular fa-thumbs-down"></i> @Model.Dislike</button>
                 </div>
             </article>
 
             <div class="comments-section">
-                <form asp-action="AddCommit" asp-controller="Main" method="post">
+                <form asp-action="AddComplaintCommit" asp-controller="Main" method="post">
                     <div class="comment-input-form">
-                        <input name="comment"  type="text" placeholder="Yorumunu yaz...">
+                        <input name="comment" type="text" placeholder="Yorumunu yaz...">
                         <button type="submit" class="btn-send">
                             <i class="fa-solid fa-paper-plane"></i>
                         </button>
@@ -76,8 +76,8 @@
 
                 <h3 style="margin-top: 30px;">Yorumlar (@ViewBag.commentCount)</h3>
 
-                @await Component.InvokeAsync("DetailComment", new { id = Model.Id, ContentType = "content" })
-                
+                @await Component.InvokeAsync("DetailComment", new { id = Model.Id, ContentType = "complaint" }) 
+
             </div>
 
         </main>

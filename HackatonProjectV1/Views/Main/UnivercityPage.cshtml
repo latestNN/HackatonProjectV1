@@ -1,0 +1,322 @@
+﻿@model List<HackatonProjectV1.Entities.MainPageElements.Department>
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+	Layout = null;
+}
+<!DOCTYPE html>
+<html class="dark" lang="tr">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Noto+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#3b82f6",
+                        "background-light": "#f6f8f7",
+                        "background-dark": "#111827",
+                        "surface-dark": "#1f2937",
+                        "border-dark": "#374151",
+                        "text-secondary": "#9ca3af",
+                        "accent-red": "#ef4444",
+                        "surface-red": "#451a1a"
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "body": ["Noto Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #111827;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #374151;
+            border-radius: 4px;
+        }
+
+            ::-webkit-scrollbar-thumb:hover {
+                background: #3b82f6;
+            }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white antialiased overflow-x-hidden">
+    <div class="relative flex min-h-screen w-full flex-col">
+        <header class="relative z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-b-border-dark bg-background-dark/95 backdrop-blur-md px-4 sm:px-10 py-3">
+            <div class="flex items-center gap-4 sm:gap-8">
+                <div class="flex items-center gap-4 text-white">
+                    <div class="size-8 text-primary">
+                        <svg class="w-full h-full" fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M42.1739 20.1739L27.8261 5.82609C29.1366 7.13663 28.3989 10.1876 26.2002 13.7654C24.8538 15.9564 22.9595 18.3449 20.6522 20.6522C18.3449 22.9595 15.9564 24.8538 13.7654 26.2002C10.1876 28.3989 7.13663 29.1366 5.82609 27.8261L20.1739 42.1739C21.4845 43.4845 24.5355 42.7467 28.1133 40.548C30.3042 39.2016 32.6927 37.3073 35 35C37.3073 32.6927 39.2016 30.3042 40.548 28.1133C42.7467 24.5355 43.4845 21.4845 42.1739 20.1739Z" fill="currentColor"></path>
+                            <path clip-rule="evenodd" d="M29.2403 4.41187L43.5881 18.7597C44.9757 20.1473 44.9743 22.1235 44.6322 23.7139C44.2714 25.3919 43.4158 27.2666 42.252 29.1604C40.8128 31.5022 38.8165 34.012 36.4142 36.4142C34.012 38.8165 31.5022 40.8128 29.1604 42.252C27.2666 43.4158 25.3919 44.2714 23.7139 44.6322C22.1235 44.9743 20.1473 44.9757 18.7597 43.5881L4.41187 29.2403C3.29027 28.1187 3.08209 26.5973 3.21067 25.2783C3.34099 23.9415 3.8369 22.4852 4.54214 21.0277C5.96129 18.0948 8.43335 14.7382 11.5858 11.5858C14.7382 8.43335 18.0948 5.9613 21.0277 4.54214C22.4852 3.8369 23.9415 3.34099 25.2783 3.21067C26.5973 3.08209 28.1187 3.29028 29.2403 4.41187Z" fill="currentColor" fill-opacity="0.5" fill-rule="evenodd"></path>
+                        </svg>
+                    </div>
+                    <h2 class="text-white text-lg font-bold leading-tight tracking-[-0.015em] hidden sm:block">Kampüs Forum</h2>
+                </div>
+                <div class="hidden md:flex items-center gap-9">
+                    <a class="text-white text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Ana Sayfa</a>
+                    <a class="text-primary text-sm font-medium leading-normal" href="#">Forumlar</a>
+                    <a class="text-white text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Profilim</a>
+                </div>
+            </div>
+            <div class="flex flex-1 justify-end gap-4 sm:gap-8">
+                <label class="hidden sm:flex flex-col min-w-40 !h-10 max-w-64">
+                    <div class="flex w-full flex-1 items-stretch rounded-lg h-full">
+                        <div class="text-text-secondary flex border-none bg-border-dark items-center justify-center pl-4 rounded-l-lg border-r-0">
+                            <span class="material-symbols-outlined text-[20px]">search</span>
+                        </div>
+                        <input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-white focus:outline-0 focus:ring-0 border-none bg-border-dark focus:border-none h-full placeholder:text-text-secondary px-4 rounded-l-none border-l-0 pl-2 text-sm font-normal leading-normal" placeholder="Forumda ara..." value="" />
+                    </div>
+                </label>
+                <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border-2 border-border-dark cursor-pointer" data-alt="User profile avatar showing a generic silhouette" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCWZcTTGpDjo90PRFQRbUYxa-YqgYAiXfu6oHADGF-I3rZVUpP74m2HQnkWp5gae-QqHwU08uVbbF4hvTUl3SyC91i0kTJbEfj2N2cLCT7QIJztL0D6VT7f7mMM3LkhSXscPqcCmTfZMefe2ui6227B-odH9IUCEJtSdHV3gdPUY1HqAYbPGPNOT8hBO7EiJHjklMgSj-eXZRt_a96xSkP9Uu94w45SVtIFtNgNgQ6fVr_qPgoknwtC5eucAszMLNKX2TLiN5YSop0w");'></div>
+            </div>
+        </header>
+
+        <main class="layout-container flex h-full grow flex-col">
+            <div class="relative w-full h-[320px] bg-cover bg-center" data-alt="Aerial view of a university campus with green lawns and historical buildings" style='background-image: url("https://www.remzihoca.com/storage/contents/1656490308-842230.jpg");'>
+                <div class="absolute inset-0 bg-gradient-to-t from-background-dark via-background-dark/80 to-transparent"></div>
+                <div class="absolute bottom-0 left-0 w-full px-4 sm:px-10 pb-8 flex justify-center">
+                    <div class="w-full max-w-[1024px] flex flex-col sm:flex-row gap-6 items-end sm:items-center">
+                        <div class="bg-white p-2 rounded-2xl shadow-lg shrink-0">
+                            <div class="bg-center bg-no-repeat bg-contain rounded-xl h-24 w-24 sm:h-32 sm:w-32" data-alt="University official seal logo" style='background-image: url("https://images.seeklogo.com/logo-png/61/2/istanbul-technical-university-logo-png_seeklogo-618455.png");'></div>
+                        </div>
+                        <div class="flex flex-col gap-1 sm:gap-2 mb-1 sm:mb-2">
+                            <h1 class="text-white text-3xl sm:text-4xl font-bold leading-tight tracking-tight shadow-black drop-shadow-md">@ViewBag.univercityName</h1>
+                            <div class="flex flex-wrap gap-4 items-center">
+                                <div class="flex items-center gap-1 text-primary">
+                                    <span class="material-symbols-outlined text-[20px]" data-location="@ViewBag.univercityCity">location_on</span>
+                                    <span class="text-sm font-medium">@ViewBag.univercityCity, Türkiye</span>
+                                </div>
+                                <div class="flex items-center gap-1 text-text-secondary">
+                                    <span class="material-symbols-outlined text-[20px]">school</span>
+                                    <span class="text-sm font-medium">Devlet Üniversitesi</span>
+                                </div>
+                                <div class="flex items-center gap-1 text-text-secondary">
+                                    <span class="material-symbols-outlined text-[20px]">groups</span>
+                                    <span class="text-sm font-medium">@ViewBag.studentCount Öğrenci</span>
+                                </div>
+                                <div class="flex items-center gap-1 text-text-secondary">
+                                    <span class="material-symbols-outlined text-[20px] text-yellow-400 fill-current">star</span>
+                                    <span class="text-sm font-medium text-white">4.8</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-full bg-surface-dark/95 backdrop-blur-sm border-b border-border-dark px-4 sm:px-10 z-40 shadow-sm transition-all">
+                <div class="flex justify-center items-center py-3 gap-4">
+                    <div class="relative w-full max-w-xl group">
+                        <span class="absolute inset-y-0 left-4 flex items-center text-text-secondary group-focus-within:text-primary transition-colors">
+                            <span class="material-symbols-outlined text-[22px]">search</span>
+                        </span>
+                        <input class="w-full h-11 pl-12 pr-4 rounded-full bg-background-dark border border-border-dark text-white placeholder-text-secondary focus:ring-2 focus:ring-primary/50 focus:border-primary text-sm transition-all shadow-inner" placeholder="Bölüm, fakülte veya konu ara..." type="text" />
+                    </div>
+                    <button class="flex items-center gap-2 bg-primary hover:bg-blue-400 text-white font-bold py-2.5 px-5 rounded-full shadow-lg shadow-primary/20 hover:shadow-primary/40 transition-all active:scale-95">
+                        <span class="material-symbols-outlined text-[20px]">add</span>
+                        <span>İçerik Oluştur</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="flex flex-1 justify-center px-4 sm:px-10 py-8">
+                <div class="flex flex-col max-w-[1024px] w-full">
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-5 mb-10 auto-rows-fr">
+                        <a class="lg:col-span-4 group relative flex flex-col justify-between overflow-hidden rounded-2xl bg-red-900/10 p-5 border border-border-dark hover:border-red-500/60 hover:shadow-[0_4px_20px_rgba(239,68,68,0.1)] transition-all duration-300 min-h-[220px]" href="/Main/Problems/@ViewBag.univercityId">
+                            <div class="absolute top-0 right-0 p-3 opacity-10 group-hover:opacity-20 transition-opacity">
+                                <span class="material-symbols-outlined text-[100px] text-red-500 -mr-6 -mt-6 rotate-12">error</span>
+                            </div>
+                            <div class="relative z-10">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <div class="bg-red-500/10 p-2 rounded-lg text-red-400 ring-1 ring-red-500/20 group-hover:bg-red-500 group-hover:text-white transition-all">
+                                        <span class="material-symbols-outlined text-[22px]">error</span>
+                                    </div>
+                                    <span class="px-2 py-0.5 rounded-full bg-red-600/30 border border-red-500/40 text-red-300 text-[9px] font-bold uppercase tracking-wider animate-pulse">Canlı Akış</span>
+                                </div>
+                                <h3 class="text-red-200/60 text-[10px] font-bold uppercase tracking-widest mb-0.5">Öğrenci Sesi</h3>
+                                <h2 class="text-white text-lg font-bold mb-1 group-hover:text-red-400 transition-colors">Aktif Problemler</h2>
+                                <p class="text-red-100/70 text-xs leading-relaxed max-w-[90%] line-clamp-2">Kampüs gündemini belirleyen sorunları incele ve çözümün parçası ol.</p>
+                            </div>
+                            <div class="relative z-10 mt-auto pt-4 flex items-center gap-2 text-xs font-semibold text-white group-hover:text-red-400 transition-colors">
+                                <span>Tartışmalara Katıl</span>
+                                <span class="material-symbols-outlined text-[16px] transition-transform group-hover:translate-x-1">arrow_forward</span>
+                            </div>
+                        </a>
+
+                        <a class="lg:col-span-4 group relative flex flex-col justify-between overflow-hidden rounded-2xl bg-gradient-to-br from-surface-dark to-[#151d26] p-5 border border-border-dark hover:border-primary/60 hover:shadow-[0_4px_20px_rgba(59,130,246,0.1)] transition-all duration-300 min-h-[220px]" href="#genel-degerlendirmeler">
+                            <div class="absolute top-0 right-0 p-3 opacity-10 group-hover:opacity-20 transition-opacity">
+                                <span class="material-symbols-outlined text-[100px] text-blue-400 -mr-6 -mt-6 rotate-12">reviews</span>
+                            </div>
+                            <div class="relative z-10">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <div class="bg-blue-500/10 p-2 rounded-lg text-blue-400 ring-1 ring-blue-500/20 group-hover:bg-blue-500 group-hover:text-white transition-all">
+                                        <span class="material-symbols-outlined text-[22px]">reviews</span>
+                                    </div>
+                                    <div class="flex items-center gap-1 text-yellow-400">
+                                        <span class="material-symbols-outlined text-[14px] fill-current">star</span>
+                                        <span class="text-sm font-bold text-white">4.8</span>
+                                    </div>
+                                </div>
+                                <h3 class="text-text-secondary text-[10px] font-bold uppercase tracking-widest mb-0.5">Genel Bakış</h3>
+                                <h2 class="text-white text-lg font-bold mb-1 group-hover:text-blue-400 transition-colors">Değerlendirmeler</h2>
+                                <p class="text-text-secondary text-xs leading-relaxed line-clamp-2">Üniversite hayatına dair genel görüşler ve istatistikler.</p>
+                            </div>
+                            <div class="relative z-10 mt-auto pt-4 flex items-center gap-2 text-xs font-semibold text-white group-hover:text-blue-400 transition-colors">
+                                <span>Raporu İncele</span>
+                                <span class="material-symbols-outlined text-[16px] transition-transform group-hover:translate-x-1">arrow_forward</span>
+                            </div>
+                        </a>
+
+                        <div class="lg:col-span-4 grid grid-rows-2 gap-4 h-full">
+                            <a class="group relative flex flex-col justify-center overflow-hidden rounded-2xl bg-surface-dark border border-border-dark hover:bg-surface-dark/80 hover:border-primary/30 transition-all px-5 py-4" href="#">
+                                <div class="relative z-10 flex items-center gap-4">
+                                    <div class="bg-primary/20 p-2.5 rounded-lg text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300 shrink-0">
+                                        <span class="material-symbols-outlined text-[24px]">trending_up</span>
+                                    </div>
+                                    <div class="flex flex-col">
+                                        <span class="text-text-secondary text-[10px] font-bold uppercase tracking-wider block mb-0.5">Popüler Konu</span>
+                                        <h2 class="text-white text-base font-bold leading-tight group-hover:text-primary transition-colors">Yemekhane Zammı</h2>
+                                    </div>
+                                    <div class="ml-auto">
+                                        <span class="material-symbols-outlined text-[20px] text-text-secondary group-hover:text-white group-hover:translate-x-1 transition-all">arrow_forward</span>
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="group relative flex flex-col justify-center overflow-hidden rounded-2xl bg-surface-dark border border-border-dark hover:bg-surface-dark/80 hover:border-purple-500/30 transition-all px-5 py-4" href="#">
+                                <div class="relative z-10 flex items-center gap-4">
+                                    <div class="bg-purple-500/20 p-2.5 rounded-lg text-purple-400 group-hover:bg-purple-500 group-hover:text-white transition-all duration-300 shrink-0">
+                                        <span class="material-symbols-outlined text-[24px]">event</span>
+                                    </div>
+                                    <div class="flex flex-col">
+                                        <span class="text-text-secondary text-[10px] font-bold uppercase tracking-wider block mb-0.5">Yaklaşan Etkinlik</span>
+                                        <h2 class="text-white text-base font-bold leading-tight group-hover:text-purple-400 transition-colors">Bahar Şenlikleri '24</h2>
+                                    </div>
+                                    <div class="ml-auto">
+                                        <span class="material-symbols-outlined text-[20px] text-text-secondary group-hover:text-white group-hover:translate-x-1 transition-all">arrow_forward</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="flex items-center gap-6 border-b border-border-dark w-full pb-0">
+                            <button class="text-white text-lg font-bold pb-2 border-b-2 border-primary transition-colors">Bölümler</button>
+                            <button class="text-text-secondary hover:text-white text-lg font-medium pb-2 border-b-2 border-transparent hover:border-text-secondary/50 transition-colors">Fakülteler</button>
+                        </div>
+                        <div class="flex gap-2 ml-4">
+                            <button class="p-2 text-text-secondary hover:text-white hover:bg-border-dark rounded transition-colors" title="Liste Görünümü">
+                                <span class="material-symbols-outlined">view_list</span>
+                            </button>
+                            <button class="p-2 text-primary bg-primary/10 rounded transition-colors" title="Kart Görünümü">
+                                <span class="material-symbols-outlined">grid_view</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+
+                        @foreach(var item in Model)
+                        {
+                            if (item.Id == 5)
+                            {
+                                <div class="group relative flex flex-col p-5 rounded-xl bg-surface-dark border-2 border-primary shadow-[0_0_15px_rgba(59,130,246,0.1)] transition-all hover:-translate-y-1">
+                                    <div class="absolute top-0 right-0 bg-primary text-white text-[10px] font-bold px-2 py-1 rounded-bl-lg rounded-tr-lg">
+                                        BÖLÜMÜNÜZ
+                                    </div>
+                                    <div class="flex items-start gap-4">
+                                        <div class="bg-primary/20 p-3 rounded-lg text-primary shrink-0">
+                                            <span class="material-symbols-outlined">terminal</span>
+                                        </div>
+                                        <div>
+                                            <h4 class="text-white font-bold text-lg leading-tight mb-1 group-hover:text-primary transition-colors">@item.Name</h4>
+                                            <div class="flex items-center gap-1 text-text-secondary text-xs mb-3">
+                                                <span class="material-symbols-outlined text-[14px]">apartment</span>
+                                                <span>Bilgisayar ve Bilişim Fakültesi</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-auto pt-4 border-t border-border-dark flex justify-between items-center">
+                                        <div class="flex -space-x-2">
+                                            <div class="w-6 h-6 rounded-full border border-surface-dark bg-gray-600 bg-cover" data-alt="Student avatar 1" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD_R3Hk7hCa7ky7yKZZkWfuJ4qm1tXefouFH4eRxbqSeY1MflgIdEMq5q7ubwq8m5pJbFdVbLp8NCjJr9yY1DBdAkarqMHh0o1r86MgS5DrmOtuKxCRCGpfzLjAgy3v5fCSX0-9Z-8xcWbVqRvdaG7XG70uqy4wDLvVnUqcfFSTwipl5eQE5iALfe84yPjdt8BxBgjL0A63QVrId1x4n8JNVjr1ErXdTORJ4y1Cl8iWdN8GOdUPqnRlOBVEQ2fLLRRFpuIbZVEcvQ3A")'></div>
+                                            <div class="w-6 h-6 rounded-full border border-surface-dark bg-gray-500 bg-cover" data-alt="Student avatar 2" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC7Gllu9-afbhoW_23mBwlm3adYHu-gOINcVnnFCEMWo4C1DwYvpkA8eUXNifqv-qBVTe9SUaRBabeKVml8pRTcltGMxt4DON7IF5GIeXPHkTdd4ALNunIm_Fy74SdbtwtFjqGdqhE8jvaBSAQH2EbTgTRf_OUdw6q_gRUnz-rQx8oAhYl_R3yKcz2xEc39ShYzvjk-WLsUCAK85mf8V-qAVOpisba9mL1ThruJx0sZe1-mKYNFLMO7zHYOq0DWkyM3cv5gvZUl3n6e")'></div>
+                                            <div class="w-6 h-6 rounded-full border border-surface-dark bg-gray-400 flex items-center justify-center text-[8px] text-white font-bold">+142</div>
+                                        </div>
+                                        <span class="text-primary text-xs font-bold flex items-center gap-1 hover:underline cursor-pointer">
+                                            Foruma Git <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+                                        </span>
+                                    </div>
+                                </div>
+                            }
+
+                            else
+                            {
+                                <div class="group flex flex-col p-5 rounded-xl bg-surface-dark border border-border-dark hover:border-text-secondary/50 transition-all hover:-translate-y-1">
+                                    <div class="flex items-start gap-4">
+                                        <div class="bg-border-dark p-3 rounded-lg text-text-secondary group-hover:text-white transition-colors shrink-0">
+                                            <span class="material-symbols-outlined">gavel</span>
+                                        </div>
+                                        <div>
+                                            <h4 class="text-white font-bold text-lg leading-tight mb-1 group-hover:text-primary transition-colors">@item.Name</h4>
+                                            <div class="flex items-center gap-1 text-text-secondary text-xs mb-3">
+                                                <span class="material-symbols-outlined text-[14px]">apartment</span>
+                                                <span>Hukuk Fakültesi</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-auto pt-4 border-t border-border-dark flex justify-between items-center opacity-75 group-hover:opacity-100 transition-opacity">
+                                        <span class="text-xs text-text-secondary">3 Yeni Başlık</span>
+                                        <span class="text-text-secondary hover:text-white text-xs font-bold flex items-center gap-1 cursor-pointer transition-colors">
+                                            Göz At
+                                        </span>
+                                    </div>
+                                </div>
+                            }
+                        }
+
+
+                        
+
+                        
+
+                        
+
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

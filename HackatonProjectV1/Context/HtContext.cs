@@ -20,7 +20,9 @@ namespace HackatonProjectV1.Context
         public DbSet<Faculty> faculties { get; set; }
         public DbSet<University> universities { get; set; }
 
-          protected override void OnModelCreating(ModelBuilder builder)
+        public DbSet<Complaint> complaints { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
 
